@@ -1,25 +1,6 @@
 # NAME
 
-**Refute** - unified testing, assertion, and design-by-contract tool
-
-# SYNOPSIS
-
-This module allows to create snippets of code called *contracts*
-that behave just as a unit test would,
-but do not require the enclosing code to be a unit test:
-
-    use Refute qw(:all) { on_fail => 'croak' };
-
-    # deep in the production code
-    my $data = Some::Module->bloated_untestable_sub;
-    try_refute {
-        like $data->{foo}, qr/f?o?r?m?a?t/;
-        is $data->{bar}, 42;
-        can_ok $data->{baz}, qw(do_this do_that frobnicate);
-    }; # this dies if conditions are not met
-
-This can be transferred *verbatim* into a unit-test,
-allowing to find the sweet spot on the `speed <---> accuracy` scale.
+**Refute** - unified testing, runtime assertion, and design-by-contract tool
 
 # WHY REFUTE
 
