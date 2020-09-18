@@ -1,4 +1,4 @@
-package Assert::Refute::T::Tester;
+package Refute::Test::Tester;
 
 use strict;
 use warnings;
@@ -6,7 +6,7 @@ our $VERSION = '0.17';
 
 =head1 NAME
 
-Assert::Refute::T::Tester - test the test conditions themselves
+Refute::Test::Tester - test the test conditions themselves
 
 =head1 DESCRIPTION
 
@@ -21,7 +21,7 @@ its interface may change in the future.
 =head1 SYNOPSIS
 
     use Test::More;
-    use Assert::Refute::T::Tester;
+    use Refute::Test::Tester;
 
     use My::Refute::Module qw(check_this check_that);
 

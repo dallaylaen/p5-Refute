@@ -520,7 +520,7 @@ As a special case, tests number 0 and -1 represent the output before any
 tests and postmortem output, respectively.
 These only contains the C<log> and C<diag> fields.
 
-See also L<Assert::Refute::T::Tester>.
+See also L<Refute::Test::Tester>.
 
 B<[EXPERIMENTAL]>. Name and meaning may change in the future.
 
