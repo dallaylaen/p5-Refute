@@ -4,11 +4,11 @@ use strict;
 use warnings;
 use Test::More;
 
-use Refute::Core::Report;
+use Refute::Report;
 
 subtest "get_title, set_title" => sub {
 
-my $rep = Refute::Core::Report->new;
+my $rep = Refute::Report->new;
     is +$rep->set_title( "Test something" ), $rep, "set_title returns self";
     is +$rep->get_title, "Test something", "get_title round trip";
     $rep->done_testing;
@@ -26,7 +26,7 @@ my $rep = Refute::Core::Report->new;
 };
 
 subtest "plan title" => sub {
-    my $rep = Refute::Core::Report->new;
+    my $rep = Refute::Report->new;
     $rep->plan( title => "some test" );
     is +$rep->get_title, "some test", "Title via plan works";
 };

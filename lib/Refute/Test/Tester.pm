@@ -59,7 +59,7 @@ use Refute::Builder;
 
     test_test \%result_details, \%spec, "Message";
 
-Result details come from L<Refute::Core::Report/get_result_details($id)>.
+Result details come from L<Refute::Report/get_result_details($id)>.
 
 The exact format MAY change in the future, but this test should keep working.
 

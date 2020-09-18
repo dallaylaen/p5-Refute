@@ -16,6 +16,6 @@ dies_like {
 dies_like {
     package T;
     Refute->configure({ driver => 'Carp' });
-} qr/Carp.*Refute::Core::Report.*driver/, "Carp is not recognized as driver";
+} qr/Carp.*Refute::Report.*driver/, "Carp is not recognized as driver";
 
 done_testing;

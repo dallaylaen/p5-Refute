@@ -5,9 +5,9 @@ use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More;
 
-use Refute::Core::Report;
+use Refute::Report;
 
-my $rep = Refute::Core::Report->new;
+my $rep = Refute::Report->new;
 
 $rep->done_testing;
 

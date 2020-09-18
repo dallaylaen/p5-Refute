@@ -5,9 +5,9 @@ use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More;
 
-use Refute::Core::Report;
+use Refute::Report;
 
-my $c = Refute::Core::Report->new;
+my $c = Refute::Report->new;
 
 ok $c->is_passing, "passing: empty = ok";
 is $c->get_count, 0, "0 tests run";
@@ -32,7 +32,7 @@ eval {
     $c->done_testing;
 };
 
-like $@, qr/Refute::Core::Report->done_testing.*done_testing.*no more/
+like $@, qr/Refute::Report->done_testing.*done_testing.*no more/
     , "done_testing locks execution log";
 
 done_testing;

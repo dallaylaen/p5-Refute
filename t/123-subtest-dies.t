@@ -4,9 +4,9 @@ use strict;
 use warnings;
 use Test::More;
 
-use Refute::Core::Report;
+use Refute::Report;
 
-my $rep = Refute::Core::Report->new;
+my $rep = Refute::Report->new;
 
 my $result = eval {
     $rep->subcontract( "this dies" => sub {

@@ -6,9 +6,9 @@ BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More tests => 9;
 use Scalar::Util qw(refaddr);
 
-use Refute::Core::Report;
+use Refute::Report;
 
-my $report = Refute::Core::Report->new;
+my $report = Refute::Report->new;
 
 is_deeply( $report->context, {}, "Context initialized" );
 
@@ -32,7 +32,7 @@ is_deeply( $report->context, {bar => 137}, "Context still there" );
 $report->done_testing; # success
 is $report->get_tap, "1..0\n", "No fails = no context appears";
 
-my $fail_rep = Refute::Core::Report->new;
+my $fail_rep = Refute::Report->new;
 $fail_rep->set_context( { foo => { bar => 42 } } );
 $fail_rep->ok( 0, "Deliberate failure" );
 $fail_rep->done_testing;

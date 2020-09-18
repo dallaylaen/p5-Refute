@@ -5,9 +5,9 @@ use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More;
 
-use Refute::Core::Report;
+use Refute::Report;
 
-my $c = Refute::Core::Report->new;
+my $c = Refute::Report->new;
 
 is $c->get_sign, "tr", "Start with 0 tests";
 

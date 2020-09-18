@@ -3,11 +3,11 @@
 use strict;
 use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
-use Refute::Core::Report;
+use Refute::Report;
 
 use Test::More;
 
-my $report = Refute::Core::Report->new;
+my $report = Refute::Report->new;
 $report->diag( "premature message" );
 $report->refute( 0, undef );
 $report->refute( 0, 0 );

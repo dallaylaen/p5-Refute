@@ -60,7 +60,7 @@ Relying on a global (in fact, per-package) callback is not required:
         # do whatever error handling is needed
     };
 
-See L<Refute::Core::Report> for more information about the underlying
+See L<Refute::Report> for more information about the underlying
 object-oriented interface.
 
 =head1 ASSERTIONS, CONTRACTS, AND SUBCONTRACTS
@@ -148,7 +148,7 @@ These need to be C<use>d explicitly.
 use Carp;
 use Exporter;
 
-use Refute::Core::Report;
+use Refute::Report;
 use Refute::Builder qw(current_contract);
 use Refute::Common;
 
@@ -240,7 +240,7 @@ or an exception is thrown.
 Otherwise it is assumed to pass.
 
 The BLOCK must accept one argument, the contract execution report,
-likely a L<Refute::Core::Report> instance.
+likely a L<Refute::Report> instance.
 
 More arguments MAY be added in the future.
 Return value is ignored.
@@ -295,7 +295,7 @@ Otherwise it is assumed to pass.
 Unlike with try_refute, exceptions are just let through.
 
 The BLOCK must accept one argument, the contract execution report,
-likely a L<Refute::Core::Report> instance.
+likely a L<Refute::Report> instance.
 
 More arguments MAY be added in the future.
 Return value is ignored.
@@ -367,7 +367,7 @@ sub _real_assert {
 
 =head2 refute_and_report { ... }
 
-Run a block of code with a fresh L<Refute::Core::Report> object as argument.
+Run a block of code with a fresh L<Refute::Report> object as argument.
 Lock the report afterwards and return it.
 
 For instance,
@@ -401,7 +401,7 @@ or C<try_refute>.
 sub refute_and_report (&;@) { ## no critic # need prototype
     my ( $block, @arg ) = @_;
 
-    return Refute::Core::Report->new->do_run($block);
+    return Refute::Report->new->do_run($block);
 };
 
 =head2 plan tests => $n
@@ -473,9 +473,9 @@ B<[NOTE]> that the message comes first, unlike in C<refute>
 or other assertion types, and is I<required>.
 
 A I<contract> may be a a code block with some assertions inside, or
-an L<Refute::Core::Report> instance from a previous contract run.
+an L<Refute::Report> instance from a previous contract run.
 
-A subroutine MUST accept an empty L<Refute::Core::Report> object.
+A subroutine MUST accept an empty L<Refute::Report> object.
 
 For instance, one could apply a previously defined validation to a
 structure member:
@@ -520,7 +520,7 @@ sub subcontract($$@) { ## no critic
     contract_is $report, $signature, "Message";
 
 Assert that a contract is fulfilled exactly to the specified extent.
-See L<Refute::Core::Report/get_sign> for signature format.
+See L<Refute::Report/get_sign> for signature format.
 
 This may be useful for verifying assertions and contracts themselves.
 
@@ -530,7 +530,7 @@ This is actually a clone of L<Refute::Common/contract_is>.
 
 =head2 current_contract
 
-Returns the L<Refute::Core::Report> object being worked on.
+Returns the L<Refute::Report> object being worked on.
 
 If L<Test::Builder> has been detected and no contract block
 is executed explicitly, returns a L<Refute::Report::Test::More> instance.
@@ -564,7 +564,7 @@ if hash parameter(s) are present.
 =item * on_fail - callback to execute if tests fail (default: C<carp>,
 but not just C<Carp::carp> - see below).
 
-=item * driver - use that class instead of L<Refute::Core::Report>
+=item * driver - use that class instead of L<Refute::Report>
 as contract report.
 
 =item * skip_all - reason for skipping ALL C<try_refute> blocks
@@ -576,7 +576,7 @@ B<[EXPERIMENTAL]>. Name and meaning MAY change in the future.
 =back
 
 The callbacks MUST be either
-a C<CODEREF> accepting L<Refute::Core::Report> object,
+a C<CODEREF> accepting L<Refute::Report> object,
 or one of predefined strings:
 
 =over
@@ -620,10 +620,10 @@ sub configure {
         my $mod = "$conf->{driver}.pm";
         $mod =~ s#::#/#g;
         require $mod;
-        croak "$conf->{driver} is not Refute::Core::Report, cannot use as driver"
-            unless $conf->{driver}->isa('Refute::Core::Report');
+        croak "$conf->{driver} is not Refute::Report, cannot use as driver"
+            unless $conf->{driver}->isa('Refute::Report');
     } else {
-        $conf->{driver} = 'Refute::Core::Report'; # this works for sure
+        $conf->{driver} = 'Refute::Report'; # this works for sure
     };
 
     if ($NDEBUG and !$conf->{skip_all}) {
@@ -711,7 +711,7 @@ specialized tool exists for doing that.
 
 Use L<Refute::Builder> to define new I<checks> as
 both prototyped exportable functions and their counterpart methods
-in L<Refute::Core::Report>.
+in L<Refute::Report>.
 These functions will perform absolutely the same
 under control of C<try_refute>, C<contract>, and L<Test::More>:
 
@@ -743,7 +743,7 @@ Suddenly it's a L<pure function|https://en.wikipedia.org/wiki/Pure_function>!
 
 Yet the exact reason for $n not being a prime will be reflected in test output.
 
-One can also subclass L<Refute::Core::Report>
+One can also subclass L<Refute::Report>
 to create new I<drivers>, for instance,
 to register failed/passed tests in a unit-testing framework of choice
 or generate warnings/exceptions when conditions are not met.

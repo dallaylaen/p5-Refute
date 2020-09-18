@@ -4,7 +4,7 @@ use strict;
 use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Refute::Builder;
-use Refute::Core::Report; # Avoid T::M detection
+use Refute::Report; # Avoid T::M detection
 use Test::More tests => 2;
 
 BEGIN {
@@ -35,7 +35,7 @@ eval {
 note $@;
 like $@, qr/odd.*already.*Foo/, "Name already taken = no go";
 
-my $report = Refute::Core::Report->new->do_run(sub {
+my $report = Refute::Report->new->do_run(sub {
     package T;
     even 2, "pass";
     odd  3, "pass";

@@ -8,13 +8,13 @@ use warnings FATAL => 'recursion';
 # Avoid Test::More detection
 use Refute::Builder qw(to_scalar);
 use Refute::Common qw(deep_diff);
-use Refute::Core::Report;
+use Refute::Report;
 
 use Test::More;
 
 note "TESTING deep_diff() negative";
 
-my $rep = Refute::Core::Report->new;
+my $rep = Refute::Report->new;
 $rep->is_deeply( undef, undef,                  "deep_diff undef" );
 $rep->is_deeply( 42, 42 ,                       "deep_diff equal" );
 $rep->is_deeply( [ foo => 42 ], [ foo => 42 ] , "deep_diff array" );

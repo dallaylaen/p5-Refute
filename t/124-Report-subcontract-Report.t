@@ -4,16 +4,16 @@ use strict;
 use warnings;
 use Test::More;
 
-use Refute::Core::Report;
+use Refute::Report;
 
-my $pass = Refute::Core::Report->new->do_run( sub {
+my $pass = Refute::Report->new->do_run( sub {
     $_[0]->ok(1);
 });
-my $fail = Refute::Core::Report->new->do_run( sub {
+my $fail = Refute::Report->new->do_run( sub {
     $_[0]->ok(0);
 });
 
-my $main = Refute::Core::Report->new;
+my $main = Refute::Report->new;
 
 $main->subcontract( "this passed" => $pass );
 $main->subcontract( "this failed" => $fail );

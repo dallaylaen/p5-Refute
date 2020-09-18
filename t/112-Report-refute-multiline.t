@@ -5,17 +5,17 @@ use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More;
 
-use Refute::Core::Report;
+use Refute::Report;
 
 subtest "Return 1 - don't log it" => sub {
-    my $report = Refute::Core::Report->new;
+    my $report = Refute::Report->new;
     $report->refute( 1, "dummy" );
 
     is $report->get_tap, "not ok 1 - dummy\n", "No info except failed test";
 };
 
 subtest "Refute string - log as is" => sub {
-    my $report = Refute::Core::Report->new;
+    my $report = Refute::Report->new;
     $report->refute( "foo bared", "dummy" );
 
     is $report->get_tap, "not ok 1 - dummy\n# foo bared\n"
@@ -23,7 +23,7 @@ subtest "Refute string - log as is" => sub {
 };
 
 subtest "Interpolate scalar" => sub {
-    my $report = Refute::Core::Report->new;
+    my $report = Refute::Report->new;
     $report->refute( {foo => 42}, "dummy" );
 
     my @tap = split /\n/, $report->get_tap;
@@ -33,7 +33,7 @@ subtest "Interpolate scalar" => sub {
 };
 
 subtest "Multiline diag" => sub {
-    my $report = Refute::Core::Report->new;
+    my $report = Refute::Report->new;
     $report->refute( [{foo => 42}, undef, "plain text" ], "dummy" );
 
     my @tap = split /\n/, $report->get_tap;

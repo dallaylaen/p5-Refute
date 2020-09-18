@@ -7,7 +7,7 @@ BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 # Avoid Test::More detection
 use Refute::Builder qw(to_scalar);
 use Refute::Common qw(deep_diff);
-use Refute::Core::Report;
+use Refute::Report;
 
 use Test::More;
 
@@ -21,8 +21,8 @@ is to_scalar(undef, 1), "undef", "to_scalar undef with quotes";
 is to_scalar("foo bar", 1), '"foo bar"', "to_scalar string with quotes";
 is to_scalar("\t\0\n\"\\", 1), '"\\t\\0\\n\\"\\\\"', "to_scalar escape";
 
-like to_scalar( Refute::Core::Report->new )
-    , qr{bless.*Refute::Core::Report}
+like to_scalar( Refute::Report->new )
+    , qr{bless.*Refute::Report}
     , "to_scalar blessed";
 
 like to_scalar( { foo => { bar => 42 }, baz => [[[[]]]] }, 1 ),
