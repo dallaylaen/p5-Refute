@@ -12,8 +12,8 @@ use Test::More tests => 4;
 my $report = refute_and_report {
     my $rep = shift;
     $rep->diag( "premature text" );
-    refute 0, "Passing test";
-    refute [ 42, 137 ], "Failing test";
+    not_ok 0, "Passing test";
+    not_ok [ 42, 137 ], "Failing test";
 };
 
 subtest "premature" => sub {

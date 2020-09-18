@@ -13,7 +13,7 @@ subtest "passing refutation" => sub {
     my $rep = Refute::Report->new;
     my $ret_val = $rep->do_run( sub {
         $capture = current_contract;
-        refute 0, "IF YOU SEE THIS MESSAGE, TESTS FAILED";
+        not_ok 0, "IF YOU SEE THIS MESSAGE, TESTS FAILED";
     } );
 
     is refaddr $capture, refaddr $rep, "current_contract() was set properly";
@@ -25,7 +25,7 @@ subtest "failing refutation" => sub {
     my $rep = Refute::Report->new;
 
     $rep->do_run( sub {
-        refute 1, "IF YOU SEE THIS MESSAGE, TESTS FAILED";
+        not_ok 1, "IF YOU SEE THIS MESSAGE, TESTS FAILED";
     } );
 
     is $rep->get_sign, "tNd", "signature as expected";

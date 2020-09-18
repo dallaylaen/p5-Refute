@@ -11,7 +11,7 @@ dies_like {
     package T;
     use Refute {};
     $report = refute_these {
-        refute 1, "If you see this message the tests have failed!";
+        not_ok 1, "If you see this message the tests have failed!";
     };
 } qr/refute_these.*no more.*try_refute/, "Deprecated, alternative suggested";
 

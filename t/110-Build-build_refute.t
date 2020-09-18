@@ -18,7 +18,7 @@ BEGIN {
 
     build_refute odd => sub {
         my ($self, $n, $message) = @_;
-        $self->refute( !($n % 2), $message || "is odd" );
+        $self->not_ok( !($n % 2), $message || "is odd" );
     }, export => 1, args => 1, manual => 1;
 };
 

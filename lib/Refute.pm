@@ -111,7 +111,7 @@ as well as
 
     use Refute qw(:core);
 
-would only export C<try_refute>, C<contract>, C<refute>,
+would only export C<try_refute>, C<contract>, C<not_ok>,
 C<contract_is>, C<subcontract>, and C<current_contract> functions.
 
 Also for convenience some basic assertions mirroring the L<Test::More> suite
@@ -157,7 +157,7 @@ my @basic = (
 );
 my @core  = qw(
     contract refute_these try_refute
-    refute subcontract contract_is current_contract
+    not_ok subcontract contract_is current_contract
 );
 my @extra = qw( assert_refute refute_and_report refute_invariant );
 
@@ -431,7 +431,7 @@ sub plan(@) { ## no critic
     current_contract->plan( @_ );
 };
 
-=head2 refute( $reason, $message )
+=head2 not_ok( $reason, $message )
 
 Verify (or, rather, try hard to disprove)
 an assertion in scope of the current contract.
@@ -451,7 +451,7 @@ and the assertions just fails, without further explanation.
 As another special case, an C<\@arrayref> reason
 will be unfolded into multiple C<diag> lines, for instance
 
-    refute [ $answer, "isn't", 42 ], "life, universe, and everything";
+    not_ok [ $answer, "isn't", 42 ], "life, universe, and everything";
 
 will output 3 diag lines.
 
@@ -460,8 +460,8 @@ Dies if no contract is being executed at the time.
 
 =cut
 
-sub refute ($$) { ## no critic
-    current_contract()->refute(@_);
+sub not_ok ($$) { ## no critic
+    current_contract()->not_ok(@_);
 };
 
 =head2 subcontract( "Message" => $contract, @arguments )
@@ -469,7 +469,7 @@ sub refute ($$) { ## no critic
 "The specified contract passes, given the arguments" assertion.
 This is similar to C<subtest> in L<Test::More>.
 
-B<[NOTE]> that the message comes first, unlike in C<refute>
+B<[NOTE]> that the message comes first, unlike in C<not_ok>
 or other assertion types, and is I<required>.
 
 A I<contract> may be a a code block with some assertions inside, or
@@ -706,7 +706,7 @@ sub refute_these (&;@) { ## no critic # need prototype
 
 =head1 EXTENDING THE SUITE
 
-Although building wrappers around C<refute> call is easy enough,
+Although building wrappers around C<not_ok> call is easy enough,
 specialized tool exists for doing that.
 
 Use L<Refute::Builder> to define new I<checks> as
@@ -761,7 +761,7 @@ If that's not enough, use L<Keyword::DEVELOPMENT>
 or just define a DEBUG constant and
 append an C<if DEBUG;> statement to C<try_refute{ ... }> blocks.
 
-That said, refute is reasonably fast.
+That said, not_ok is reasonably fast.
 Special care is taken to minimize the CPU usage by I<passing> contracts.
 
 The C<example/00-benchmark.pl> file in this distribution is capable of
@@ -775,7 +775,7 @@ Communicating a passing test normally requires 1 bit of information:
 everything went as planned.
 For failing test, however, as much information as possible is desired.
 
-Thus C<refute($condition, $message)> stands for an inverted assertion.
+Thus C<not_ok($condition, $message)> stands for an inverted assertion.
 If $condition is B<false>, it is regarded as a B<success>.
 If it is B<true>, however, it is considered to be the B<reason>
 for a failing test.
@@ -824,7 +824,7 @@ unless such deprecation is extremely cumbersome.
 
 Test coverage is maintained at >90%, but who knows what lurks in the other 10%.
 
-See L<https://github.com/dallaylaen/assert-refute-perl/issues>
+See L<https://github.com/dallaylaen/assert-not_ok-perl/issues>
 to browse old bugs or report new ones.
 
 =head1 SUPPORT
@@ -838,7 +838,7 @@ You can also look for information at:
 =over
 
 =item * First and foremost, use
-L<Github|https://github.com/dallaylaen/assert-refute-perl/>!
+L<Github|https://github.com/dallaylaen/assert-not_ok-perl/>!
 
 =item * C<RT>: CPAN's request tracker (report bugs here)
 

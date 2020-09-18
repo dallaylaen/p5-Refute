@@ -15,14 +15,14 @@ use Refute::Errors;
 warns_like {
     package T;
     try_refute {
-        refute 1, "This shouldn't be output";
+        not_ok 1, "This shouldn't be output";
     };
 } [ qr/not ok 1.*1..1.*[Cc]ontract failed/s ], "Warning as expected";
 
 warns_like {
     package T;
     try_refute {
-        refute 0, "This shouldn't be output";
+        not_ok 0, "This shouldn't be output";
     };
 } [], "Warning as expected";
 

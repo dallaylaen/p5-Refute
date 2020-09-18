@@ -9,10 +9,10 @@ use Refute::Report;
 
 my $rep = Refute::Report->new;
 
-$rep->refute( 0 ); # ok
-$rep->refute( 1 );
-$rep->refute( 0 );
-$rep->refute( [ "foo", "isn't", "bar" ] );
+$rep->not_ok( 0 ); # ok
+$rep->not_ok( 1 );
+$rep->not_ok( 0 );
+$rep->not_ok( [ "foo", "isn't", "bar" ] );
 
 is_deeply [ $rep->get_failed_ids ], [ 2, 4 ], "Failed ids as expected";
 

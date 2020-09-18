@@ -9,14 +9,14 @@ use Refute::Report;
 
 subtest "Return 1 - don't log it" => sub {
     my $report = Refute::Report->new;
-    $report->refute( 1, "dummy" );
+    $report->not_ok( 1, "dummy" );
 
     is $report->get_tap, "not ok 1 - dummy\n", "No info except failed test";
 };
 
 subtest "Refute string - log as is" => sub {
     my $report = Refute::Report->new;
-    $report->refute( "foo bared", "dummy" );
+    $report->not_ok( "foo bared", "dummy" );
 
     is $report->get_tap, "not ok 1 - dummy\n# foo bared\n"
         , "Log the reason verbatim";
@@ -24,7 +24,7 @@ subtest "Refute string - log as is" => sub {
 
 subtest "Interpolate scalar" => sub {
     my $report = Refute::Report->new;
-    $report->refute( {foo => 42}, "dummy" );
+    $report->not_ok( {foo => 42}, "dummy" );
 
     my @tap = split /\n/, $report->get_tap;
     is $tap[0], "not ok 1 - dummy", "Failing test logged";
@@ -34,7 +34,7 @@ subtest "Interpolate scalar" => sub {
 
 subtest "Multiline diag" => sub {
     my $report = Refute::Report->new;
-    $report->refute( [{foo => 42}, undef, "plain text" ], "dummy" );
+    $report->not_ok( [{foo => 42}, undef, "plain text" ], "dummy" );
 
     my @tap = split /\n/, $report->get_tap;
     is $tap[0], "not ok 1 - dummy", "Failing test logged";

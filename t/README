@@ -13,7 +13,7 @@
     BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 
 # TODO bootstrapping sequence:
-1) Verify refute(), is_passing(), get_tap(), and get_sign()
+1) Verify not_ok(), is_passing(), get_tap(), and get_sign()
 2) Verify refute_and_report { ... }
 3) Verify is, like assertions
 4) Verify contract_is, test_test assertions

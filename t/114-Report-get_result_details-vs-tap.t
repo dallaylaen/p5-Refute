@@ -9,12 +9,12 @@ use Test::More;
 
 my $report = Refute::Report->new;
 $report->diag( "premature message" );
-$report->refute( 0, undef );
-$report->refute( 0, 0 );
-$report->refute( 0, "passing test" );
-$report->refute( 1, "failing test" );
-$report->refute( "reason", "test with reason" );
-$report->refute( [ {foo => 42}, "bar"], "multiline reason" );
+$report->not_ok( 0, undef );
+$report->not_ok( 0, 0 );
+$report->not_ok( 0, "passing test" );
+$report->not_ok( 1, "failing test" );
+$report->not_ok( "reason", "test with reason" );
+$report->not_ok( [ {foo => 42}, "bar"], "multiline reason" );
 $report->done_testing;
 
 is $report->get_sign, "t3NNNd", "Report is consistent";

@@ -11,7 +11,7 @@ Refute::Builder - tool for extending Refute suite
 
 =head1 DESCRIPTION
 
-Although arbitrary checks may be created using just the C<refute> function,
+Although arbitrary checks may be created using just the C<not_ok> function,
 they may be cumbersome to use and especially share.
 
 This module takes care of some boilerplate as well as maintains parity
@@ -181,7 +181,7 @@ sub build_refute(@) { ## no critic # Moose-like DSL for the win!
         my $self = shift;
         my $message; $message = pop unless @_ <= $nargs;
 
-        return $self->refute( scalar $cond->(@_), $message );
+        return $self->not_ok( scalar $cond->(@_), $message );
     };
     my $wrapper = $opt{manual} ? sub {
         return $cond->( $Refute::DRIVER || current_contract(), @_ );
@@ -190,7 +190,7 @@ sub build_refute(@) { ## no critic # Moose-like DSL for the win!
         return (
             # Ugly hack for speed in happy case
             $Refute::DRIVER || current_contract()
-        )->refute( scalar $cond->(@_), $message );
+        )->not_ok( scalar $cond->(@_), $message );
     };
     if (!$opt{no_proto} and ($opt{block} || $opt{list} || defined $opt{args})) {
         my $proto = $opt{list} ? '@' : '$' x ($opt{args} || 0);

@@ -70,17 +70,17 @@ my $diag = run_cmd( "diag q{IF YOU SEE THIS, TEST FAILED}" );
 like $diag, qr/IF YOU SEE/, "(self-test) STDERR is captured";
 
 note "HAPPY PATH";
-my $smoke = run_cmd( "refute 0, q{good}; done_testing;" );
+my $smoke = run_cmd( "not_ok 0, q{good}; done_testing;" );
 is $smoke, "ok 1 - good\n1..1\n", "Happy case";
 
 note "FAIL";
-my $smoke_bad = run_cmd( "refute q{reason}, q{bad}; done_testing;" );
+my $smoke_bad = run_cmd( "not_ok q{reason}, q{bad}; done_testing;" );
 like $smoke_bad, qr/^not ok 1/, "test failed";
 like $smoke_bad, qr/\n# *reason/, "reason preserved";
 like $smoke_bad, qr/\n1..1\n/s, "plan present";
 
 note "SUBTEST";
-my $smoke_subtest = run_cmd( "subcontract inner => sub { refute reason => q{fail} for 1..2 }; done_testing;" );
+my $smoke_subtest = run_cmd( "subcontract inner => sub { not_ok reason => q{fail} for 1..2 }; done_testing;" );
 like $smoke_subtest, qr/\nnot ok 1 - inner/, "subtest failed";
 like $smoke_subtest, qr/\n +not ok 2/, "Inner test there";
 like $smoke_subtest, qr/\n +# reason/, "Fail reason present";
@@ -95,8 +95,8 @@ my $getters = run_cmd( <<'PERL' );
     ok 1;
     note q{pre_pass=}.current_contract->is_passing;
     ok 0;
-    current_contract->refute( q{foo bared}, q{fail} );
-    current_contract->refute( 0, q{pass} );
+    current_contract->not_ok( q{foo bared}, q{fail} );
+    current_contract->not_ok( 0, q{pass} );
 
     note q{#########};
     note q{count=}.current_contract->get_count;

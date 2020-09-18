@@ -28,7 +28,7 @@ isa_ok $t, "Refute::Report::Test::More", "Driver isa Test::More interface";
 
 check_test (
     sub {
-        refute 0, "Happy case";
+        not_ok 0, "Happy case";
     },
     {
         name => "Happy case",
@@ -43,7 +43,7 @@ subtest "unhappy case" => sub {
         sub {
             $capture{start_count} = current_contract->get_count;
             $capture{start_ok}    = current_contract->is_passing;
-            refute 1, "Unhappy case";
+            not_ok 1, "Unhappy case";
             $capture{end_count}   = current_contract->get_count;
             $capture{end_ok}      = current_contract->is_passing;
         },
@@ -67,7 +67,7 @@ subtest "Unhappy case (with reason)" => sub {
     my $capture;
     check_test (
         sub {
-            refute "reason", "Unhappy case (with reason)";
+            not_ok "reason", "Unhappy case (with reason)";
             $capture = current_contract->get_result(1);
         },
         {
@@ -80,7 +80,7 @@ subtest "Unhappy case (with reason)" => sub {
 
 check_test (
     sub {
-        refute [reason => 42], "Unhappy case (multiline reason)";
+        not_ok [reason => 42], "Unhappy case (multiline reason)";
     },
     {
         ok   => 0,
@@ -90,7 +90,7 @@ check_test (
 
 check_test (
     sub {
-        refute 0, "diag only";
+        not_ok 0, "diag only";
         current_contract->diag("round-trip");
     },
     {

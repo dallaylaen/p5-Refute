@@ -66,19 +66,19 @@ sub new {
     $self;
 };
 
-=head2 refute( $condition, $message )
+=head2 not_ok( $condition, $message )
 
-The allmighty refute() boils down to
+The allmighty not_ok() boils down to
 
      ok !$condition, $message
         or diag $condition;
 
 =cut
 
-sub refute {
+sub not_ok {
     my ($self, $reason, $mess) = @_;
 
-    # TODO bug - if refute() is called directly as $contract->refute,
+    # TODO bug - if not_ok() is called directly as $contract->not_ok,
     # it will report the wrong file & line
     local $Test::Builder::Level = $Test::Builder::Level + 1;
 
@@ -93,7 +93,7 @@ sub refute {
     };
 
     # Do we even need to track it here?
-    $self->SUPER::refute($reason, $mess);
+    $self->SUPER::not_ok($reason, $mess);
 };
 
 =head2 subcontract

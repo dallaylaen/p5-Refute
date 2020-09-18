@@ -20,10 +20,10 @@ L</QUERYING PRIMITIVES> for inspection.
 =head1 SYNOPSIS
 
     my $c = Refute::Report->new;
-    $c->refute ( $cond, $message );
-    $c->refute ( $cond2, $message2 );
+    $c->not_ok ( $cond, $message );
+    $c->not_ok ( $cond2, $message2 );
     # .......
-    $c->done_testing; # no more refute after this
+    $c->done_testing; # no more not_ok after this
 
     $c->get_count;    # how many tests were run
     $c->is_passing;   # did any of them fail?
@@ -34,7 +34,7 @@ L</QUERYING PRIMITIVES> for inspection.
 # Now this module is the CORE of Refute.
 # There are 3 things for which performance matters:
 # 1) new()
-# 2) refute( 0, ... )
+# 2) not_ok( 0, ... )
 # 3) done_testing()
 # The rest can wait.
 
@@ -130,18 +130,18 @@ sub plan {
     return $self;
 };
 
-=head3 refute( $condition, $message )
+=head3 not_ok( $condition, $message )
 
 An inverted assertion. That is, it B<passes> if C<$condition> is B<false>.
 
 Returns inverse of first argument.
 Dies if L</done_testing> was called.
 
-See L<Refute/refute> for more detailed discussion.
+See L<Refute/not_ok> for more detailed discussion.
 
 =cut
 
-sub refute {
+sub not_ok {
     my ($self, $cond, $msg) = @_;
 
     $self->_croak( $ERROR_DONE )
@@ -311,7 +311,7 @@ sub set_title {
 
 L<Refute> comes with a set of basic checks
 similar to that of L<Test::More>, all being wrappers around
-L</refute> discussed above.
+L</not_ok> discussed above.
 They are available as both prototyped functions (if requested) I<and>
 methods in contract execution object and its descendants.
 
@@ -349,7 +349,7 @@ Exceptions are rethrown, leaving a failed contract behind.
 
 =back
 
-B<[NOTE]> that the message comes first, unlike in C<refute> or other
+B<[NOTE]> that the message comes first, unlike in C<not_ok> or other
 test conditions, and is required.
 
 =cut
@@ -387,7 +387,7 @@ sub subcontract {
     };
 
     $self->{subcontract}{ $self->get_count + 1 } = $rep;
-    my $ret = $self->refute( !$rep->is_passing, "$msg (subtest)" );
+    my $ret = $self->not_ok( !$rep->is_passing, "$msg (subtest)" );
     die $rethrow if $rethrow;
     return $ret;
 };

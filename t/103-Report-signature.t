@@ -11,16 +11,16 @@ my $c = Refute::Report->new;
 
 is $c->get_sign, "tr", "Start with 0 tests";
 
-$c->refute(0);
+$c->not_ok(0);
 is $c->get_sign, "t1r", "Still running";
 
-$c->refute(0);
+$c->not_ok(0);
 is $c->get_sign, "t2r", "Passes compacter";
 
-$c->refute(1);
+$c->not_ok(1);
 is $c->get_sign, "t2Nr", "Failing test added";
 
-$c->refute(0) for 1 .. 3;
+$c->not_ok(0) for 1 .. 3;
 is $c->get_sign, "t2N3r", "3 more tests";
 
 $c->done_testing;

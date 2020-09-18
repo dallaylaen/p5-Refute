@@ -11,7 +11,7 @@ BEGIN{
 use Refute {};
 
 my $report = try_refute {
-    refute [ 42, 137 ], "Life is fine";
+    not_ok [ 42, 137 ], "Life is fine";
 };
 
 ok $report->is_passing, "Report still passing though it shouldn't";

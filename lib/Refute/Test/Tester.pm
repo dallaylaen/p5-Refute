@@ -108,7 +108,7 @@ sub _test_test {
         my $rep = shift;
 
         if (defined $ok) {
-            $rep->refute( ($ok xor $hash->{ok}), "test ".($ok?"passed":"failed"));
+            $rep->not_ok( ($ok xor $hash->{ok}), "test ".($ok?"passed":"failed"));
         };
 
         if (defined $name) {

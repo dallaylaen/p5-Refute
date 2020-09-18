@@ -21,11 +21,11 @@ use Test::More;
 
 my $sample = Refute::Report->new;
 $sample->diag( "Testing T::Tester" );
-$sample->refute( 0, "passing test" );
-$sample->refute( 1, "failing test" );
-$sample->refute( "reason", "very failing test" );
+$sample->not_ok( 0, "passing test" );
+$sample->not_ok( 1, "failing test" );
+$sample->not_ok( "reason", "very failing test" );
 $sample->diag( "more data here" );
-$sample->refute( [ {}, "isn't", 42 ], "multiline reason" );
+$sample->not_ok( [ {}, "isn't", 42 ], "multiline reason" );
 $sample->done_testing;
 
 is $sample->get_tap, q{# Testing T::Tester

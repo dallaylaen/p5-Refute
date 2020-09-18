@@ -92,10 +92,10 @@ note $report->get_tap;
 
 $report = refute_and_report {
     package T;
-    refute 0, "dummy";
-    refute { foo => 42 }, "dummy";
+    not_ok 0, "dummy";
+    not_ok { foo => 42 }, "dummy";
 };
-is $report->get_sign, "t1Nd", "refute()";
+is $report->get_sign, "t1Nd", "not_ok()";
 note $report->get_tap;
 
 $report = refute_and_report {

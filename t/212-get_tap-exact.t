@@ -41,8 +41,8 @@ TEST
 
 is
 try_refute {
-    refute 0, "$all_good";
-    refute 0, '';
+    not_ok 0, "$all_good";
+    not_ok 0, '';
 }->get_tap,
 <<"TEST",
 ok 1 - $all_good
@@ -54,8 +54,8 @@ TEST
 is
 try_refute {
     $_[0]->plan( tests => 2 );
-    refute 0, "$all_good";
-    refute 0, '';
+    not_ok 0, "$all_good";
+    not_ok 0, '';
 }->get_tap,
 <<"TEST",
 1..2
@@ -66,9 +66,9 @@ TEST
 
 is
 try_refute {
-    refute 0, "$all_good";
+    not_ok 0, "$all_good";
     $_[0]->diag("$all_good");
-    refute 0, '';
+    not_ok 0, '';
 }->get_tap,
 <<"TEST",
 ok 1 - $all_good
@@ -81,13 +81,13 @@ TEST
 
 is
 try_refute {
-    refute 0, "$all_good";
+    not_ok 0, "$all_good";
     subcontract "$all_good" => sub {
-        refute 0, "$all_good";
+        not_ok 0, "$all_good";
         $_[0]->diag("$all_good");
         $_[0]->diag("Indented as intended");
     };
-    refute 0, '';
+    not_ok 0, '';
 }->get_tap,
 <<"TEST",
 ok 1 - $all_good
@@ -105,7 +105,7 @@ TEST
 
 is
 try_refute {
-    refute $all_good, $all_good;
+    not_ok $all_good, $all_good;
 }->get_tap,
 <<"TEST",
 not ok 1 - $all_good
@@ -117,7 +117,7 @@ TEST
 
 is
 try_refute {
-    refute [ $all_good, "isn't", 42 ], $all_good;
+    not_ok [ $all_good, "isn't", 42 ], $all_good;
 }->get_tap,
 <<"TEST",
 not ok 1 - $all_good
@@ -132,7 +132,7 @@ TEST
 is
 try_refute {
     $_[0]->plan( tests => 3 );
-    refute 0, $all_good;
+    not_ok 0, $all_good;
 }->get_tap,
 <<"TEST",
 1..3
@@ -144,7 +144,7 @@ TEST
 is
 try_refute {
     $_[0]->plan( tests => 1 );
-    refute 0, $all_good;
+    not_ok 0, $all_good;
     die "Foo bared\n";
 }->get_tap,
 <<"TEST",
@@ -157,11 +157,11 @@ TEST
 is
 try_refute {
     $_[0]->plan( tests => 3 );
-    refute 0, $all_good;
+    not_ok 0, $all_good;
     subcontract $all_good => sub {
-        refute $all_good, $all_good;
+        not_ok $all_good, $all_good;
     };
-    refute 0, '';
+    not_ok 0, '';
 }->get_tap,
 <<"TEST",
 1..3

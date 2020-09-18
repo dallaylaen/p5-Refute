@@ -14,9 +14,9 @@ is $c->get_count, 0, "0 tests run";
 is $c->get_fail_count, 0, "0 of them failed";
 is_deeply [$c->get_tests], [], "get_tests works";
 
-ok $c->refute( 0, "right" ), "refute(false) yelds true";
+ok $c->not_ok( 0, "right" ), "not_ok(false) yelds true";
 ok $c->is_passing, "still passing";
-ok !$c->refute( "foobared", "wrong" ), "refute(false) yelds true";
+ok !$c->not_ok( "foobared", "wrong" ), "not_ok(false) yelds true";
 ok !$c->is_passing, "not passing now";
 is $c->get_count, 2, "2 tests now";
 is $c->get_fail_count, 1, "1 of them failed";
