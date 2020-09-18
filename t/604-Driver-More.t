@@ -24,7 +24,7 @@ my $t = eval {
 };
 is $@, '', "No exception during current_contract";
 isa_ok $t, "Refute::Core::Report", "Driver isa report object";
-isa_ok $t, "Assert::Refute::Driver::More", "Driver isa Test::More interface";
+isa_ok $t, "Refute::Report::Test::More", "Driver isa Test::More interface";
 
 check_test (
     sub {

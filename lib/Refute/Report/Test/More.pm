@@ -1,4 +1,4 @@
-package Assert::Refute::Driver::More;
+package Refute::Report::Test::More;
 
 use 5.006;
 use strict;
@@ -7,7 +7,7 @@ our $VERSION = '0.17';
 
 =head1 NAME
 
-Assert::Refute::Driver::More - Test::More compatibility layer for Asser::Refute suite
+Refute::Report::Test::More - Test::More compatibility layer for Asser::Refute suite
 
 =head1 SYNOPSIS
 

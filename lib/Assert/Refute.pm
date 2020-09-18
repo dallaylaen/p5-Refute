@@ -567,7 +567,7 @@ This is actually a clone of L<Refute::Common/contract_is>.
 Returns the L<Refute::Core::Report> object being worked on.
 
 If L<Test::Builder> has been detected and no contract block
-is executed explicitly, returns a L<Assert::Refute::Driver::More> instance.
+is executed explicitly, returns a L<Refute::Report::Test::More> instance.
 This allows to define assertions and run them uniformly under
 both L<Assert::Refute> and L<Test::More> control.
 
@@ -783,7 +783,7 @@ to register failed/passed tests in a unit-testing framework of choice
 or generate warnings/exceptions when conditions are not met.
 
 That's how L<Test::More> integration is done -
-see L<Assert::Refute::Driver::More>.
+see L<Refute::Report::Test::More>.
 
 =head1 PERFORMANCE
 

@@ -242,8 +242,8 @@ sub current_contract() { ## nocritic
 
     # Would love to just die, but...
     if ($MORE_DETECTED) {
-        require Assert::Refute::Driver::More;
-        return $Assert::Refute::DRIVER = Assert::Refute::Driver::More->new;
+        require Refute::Report::Test::More;
+        return $Assert::Refute::DRIVER = Refute::Report::Test::More->new;
     };
 
     croak "Not currently testing anything";
