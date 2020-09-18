@@ -5,10 +5,10 @@ use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More;
 
-use Assert::Refute::Report;
+use Refute::Core::Report;
 
 subtest "plan ok" => sub {
-    my $rep = Assert::Refute::Report->new;
+    my $rep = Refute::Core::Report->new;
 
     $rep->plan(tests => 1);
     $rep->ok(1);
@@ -20,7 +20,7 @@ subtest "plan ok" => sub {
 };
 
 subtest "bad plan" => sub {
-    my $rep = Assert::Refute::Report->new;
+    my $rep = Refute::Core::Report->new;
 
     $rep->plan(tests => 5);
     $rep->ok(1) for 1..4;

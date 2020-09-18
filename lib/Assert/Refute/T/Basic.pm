@@ -16,7 +16,7 @@ L<Test::More>, like C<is $got, $expected;> or C<like $got, qr/.../;>.
 
 They appear as both exportable functions in this module
 and L<Assert::Refute> itself
-I<and> as corresponding methods in L<Assert::Refute::Report>.
+I<and> as corresponding methods in L<Refute::Core::Report>.
 
 =head1 FUNCTIONS
 
@@ -28,11 +28,11 @@ exported by default. Scalar context is imposed onto arguments, so
 would actually compare arrays by length.
 
 If a C<contract { ... }> is in action, the results of each assertion
-will be recorded there. See L<Assert::Refute::Report> for more.
+will be recorded there. See L<Refute::Core::Report> for more.
 If L<Test::More> is in action, a unit testing script is assumed.
 If neither is true, an exception is thrown.
 
-In addition, a C<Assert::Refute::Report-E<gt>function_name> method with
+In addition, a C<Refute::Core::Report-E<gt>function_name> method with
 the same signature is generated for each of them
 (see L<Assert::Refute::Build>).
 
@@ -261,7 +261,7 @@ sub _isa_ok {
 
 Check that a contract has been fullfilled to exactly the specified extent.
 
-See L<Assert::Refute::Report/get_sign> for exact signature format.
+See L<Refute::Core::Report/get_sign> for exact signature format.
 
 =cut
 

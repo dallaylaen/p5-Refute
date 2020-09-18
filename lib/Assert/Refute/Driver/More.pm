@@ -38,14 +38,14 @@ B<if> Test::More has been loaded B<before> Assert::Refute.
 
 =head1 METHODS
 
-We override some methods of L<Assert::Refute::Report> below so that
+We override some methods of L<Refute::Core::Report> below so that
 test results are fed to the more backend.
 
 =cut
 
 use Carp;
 
-use parent qw(Assert::Refute::Report);
+use parent qw(Refute::Core::Report);
 use Assert::Refute::Build qw(to_scalar);
 
 =head2 new
@@ -85,7 +85,7 @@ sub refute {
     $self->{count} = $self->{builder}->current_test;
     $self->{builder}->ok(!$reason, $mess);
 
-    # see Assert::Refute::Report->get_result_detail
+    # see Refute::Core::Report->get_result_detail
     if (ref $reason eq 'ARRAY') {
         $self->{builder}->diag(to_scalar($_)) for @$reason;
     } elsif ($reason and $reason ne 1) {

@@ -14,12 +14,12 @@ use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 
 # Assure we don't autodetect Test::More and adjust to it
-use Assert::Refute::Report;
+use Refute::Core::Report;
 use Assert::Refute::T::Tester;
 
 use Test::More;
 
-my $sample = Assert::Refute::Report->new;
+my $sample = Refute::Core::Report->new;
 $sample->diag( "Testing T::Tester" );
 $sample->refute( 0, "passing test" );
 $sample->refute( 1, "failing test" );
@@ -43,7 +43,7 @@ not ok 4 - multiline reason
 }, "self-test (fix hardcoded expected value if formatting changes)";
 
 subtest "happy case" => sub {
-    my $report = Assert::Refute::Report->new;
+    my $report = Refute::Core::Report->new;
     $report->test_test(
         $sample->get_result_details(0),
         {
@@ -99,7 +99,7 @@ subtest "happy case" => sub {
 };
 
 subtest "{ok} failure modes" => sub {
-    my $report = Assert::Refute::Report->new;
+    my $report = Refute::Core::Report->new;
     $report->test_test( $sample->get_result_details(1), { ok => 0 } );
     $report->test_test( $sample->get_result_details(1), { ok => 1 } );
     $report->test_test( $sample->get_result_details(2), { ok => 0 } );
@@ -111,7 +111,7 @@ subtest "{ok} failure modes" => sub {
 };
 
 subtest "{name} failure modes" => sub {
-    my $report = Assert::Refute::Report->new;
+    my $report = Refute::Core::Report->new;
     # this passes because undef is read as "do not check"
     $report->test_test( $sample->get_result_details(1), { name => undef } );
     $report->test_test( $sample->get_result_details(1), { name => "passing" } );
@@ -124,7 +124,7 @@ subtest "{name} failure modes" => sub {
 };
 
 subtest "{diag} failure modes" => sub {
-    my $report = Assert::Refute::Report->new;
+    my $report = Refute::Core::Report->new;
     $report->test_test(
         $sample->get_result_details(1),
         {
@@ -163,7 +163,7 @@ subtest "{diag} failure modes" => sub {
 };
 
 eval {
-    my $report = Assert::Refute::Report->new;
+    my $report = Refute::Core::Report->new;
     $report->test_test(
         $sample->get_result_details(1),
         {
@@ -174,7 +174,7 @@ eval {
 like $@, qr/Unknown.*foobared/, "Extra fields are not allowed";
 
 eval {
-    my $report = Assert::Refute::Report->new;
+    my $report = Refute::Core::Report->new;
     $report->test_test(
         $sample->get_result_details(1),
         {

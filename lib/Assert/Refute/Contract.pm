@@ -13,7 +13,7 @@ Assert::Refute::Contract - Contract definition class for Assert::Refute suite
 
 This class represents a contract and is thus immutable.
 
-See L<Assert::Refute::Report> for its I<application> to a specific case.
+See L<Refute::Core::Report> for its I<application> to a specific case.
 
 =head1 SYNOPSIS
 
@@ -36,7 +36,7 @@ See L<Assert::Refute::Report> for its I<application> to a specific case.
 =head1 DESCRIPTION
 
 This is a contract B<specification> class.
-See L<Assert::Refute::Report> for execution log.
+See L<Refute::Core::Report> for execution log.
 See L<Assert::Refute/contract> for convenient interface.
 
 =cut
@@ -44,7 +44,7 @@ See L<Assert::Refute/contract> for convenient interface.
 use Carp;
 use parent qw(Exporter);
 
-use Assert::Refute::Report;
+use Refute::Core::Report;
 
 our @CARP_NOT = qw(Assert::Refute Assert::Refute::Build);
 our @EXPORT_OK = qw(contract);
@@ -87,7 +87,7 @@ Note that contract does B<not> validate anything by itself,
 it just creates a read-only L<Assert::Refute::Contract>
 object sitting there and waiting for an C<apply> call.
 
-The C<apply> call returns a L<Assert::Refute::Report> object containing
+The C<apply> call returns a L<Refute::Core::Report> object containing
 results of specific execution.
 
 This is similar to how C<prepare> / C<execute> works in L<DBI>.
@@ -142,7 +142,7 @@ my @new_optional  = qw( driver );
 my %new_arg;
 $new_arg{$_}++ for @new_essential, @new_optional;
 
-my $def_driver = "Assert::Refute::Report";
+my $def_driver = "Refute::Core::Report";
 
 sub new {
     my ($class, %opt) = @_;
@@ -212,7 +212,7 @@ sub adjust {
 
 Spawn a new execution log object and run contract against it.
 
-Returns a locked L<Assert::Refute::Report> instance.
+Returns a locked L<Refute::Core::Report> instance.
 
 =cut
 

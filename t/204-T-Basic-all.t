@@ -102,7 +102,7 @@ $report = refute_and_report {
     package TT;
     our @ISA = 'T';
     package T;
-    isa_ok current_contract, "Assert::Refute::Report";
+    isa_ok current_contract, "Refute::Core::Report";
     isa_ok current_contract, "Foo::Bar";
     isa_ok "TT", "T";
     isa_ok "TT", "Foo::Bar";
@@ -124,7 +124,7 @@ note $report->get_tap;
 $report = refute_and_report {
     # TODO write a better new_ok
     package T;
-    new_ok "Assert::Refute::Report", [];
+    new_ok "Refute::Core::Report", [];
     new_ok "No::Such::Package", [];
 };
 is $report->get_sign, "t1Nd", "new_ok()";

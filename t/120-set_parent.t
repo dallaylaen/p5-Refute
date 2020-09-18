@@ -5,10 +5,10 @@ use warnings;
 use Test::More;
 use Scalar::Util qw( weaken refaddr );
 
-use Assert::Refute::Report;
+use Refute::Core::Report;
 
-my $child  = Assert::Refute::Report->new;
-my $parent = Assert::Refute::Report->new;
+my $child  = Refute::Core::Report->new;
+my $parent = Refute::Core::Report->new;
 
 is $child->get_parent, undef, "initial parent is null";
 

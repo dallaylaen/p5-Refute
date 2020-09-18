@@ -5,9 +5,9 @@ use warnings;
 use Test::More;
 use Scalar::Util qw( weaken refaddr );
 
-use Assert::Refute::Report;
+use Refute::Core::Report;
 
-my $parent = Assert::Refute::Report->new;
+my $parent = Refute::Core::Report->new;
 
 $parent->subcontract("inner test" => sub {
     my $inner = shift;
@@ -19,7 +19,7 @@ my $details = $parent->get_result_details(1);
 
 my $child = $details->{subcontract};
 
-isa_ok $child, "Assert::Refute::Report";
+isa_ok $child, "Refute::Core::Report";
 
 is refaddr $child->get_parent, refaddr $parent, "subcontract retains parent";
 

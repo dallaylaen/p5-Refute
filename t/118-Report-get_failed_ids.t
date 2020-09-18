@@ -5,9 +5,9 @@ use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More;
 
-use Assert::Refute::Report;
+use Refute::Core::Report;
 
-my $rep = Assert::Refute::Report->new;
+my $rep = Refute::Core::Report->new;
 
 $rep->refute( 0 ); # ok
 $rep->refute( 1 );

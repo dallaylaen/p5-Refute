@@ -1,4 +1,4 @@
-package Assert::Refute::Report;
+package Refute::Core::Report;
 
 use 5.006;
 use strict;
@@ -7,7 +7,7 @@ our $VERSION = '0.17';
 
 =head1 NAME
 
-Assert::Refute::Report - Contract execution class for Assert::Refute suite
+Refute::Core::Report - Contract execution class for Assert::Refute suite
 
 =head1 DESCRIPTION
 
@@ -21,7 +21,7 @@ See L<Assert::Refute::Contract> for contract I<definition>.
 
 =head1 SYNOPSIS
 
-    my $c = Assert::Refute::Report->new;
+    my $c = Refute::Core::Report->new;
     $c->refute ( $cond, $message );
     $c->refute ( $cond2, $message2 );
     # .......
@@ -54,7 +54,7 @@ my $ERROR_DONE = "done_testing was called, no more changes may be added";
 
 =head3 new
 
-    Assert::Refute::Report->new();
+    Refute::Core::Report->new();
 
 No arguments are currently supported.
 
@@ -326,7 +326,7 @@ C<contract_is>, C<is_deeply>, C<fail>, C<pass>, C<note>, C<diag>.
 See L<Assert::Refute::T::Basic> for more details.
 
 Additionally, I<any> checks defined using L<Assert::Refute::Build>
-will be added to L<Assert::Refute::Report> as methods
+will be added to L<Refute::Core::Report> as methods
 unless explicitly told otherwise.
 
 =head3 subcontract( "Message" => $specification, @arguments ... )
@@ -338,7 +338,7 @@ $specification may be one of:
 =over
 
 =item * code reference - will be executed in C<eval> block, with a I<new>
-L<Assert::Refute::Report> passed as argument.
+L<Refute::Core::Report> passed as argument.
 
 Exceptions are rethrown, leaving a failed contract behind.
 
@@ -352,7 +352,7 @@ Exceptions are rethrown, leaving a failed contract behind.
 As of v.0.15, contract swallows exceptions, leaving behind a failed
 contract report only. This MAY change in the future.
 
-=item * L<Assert::Refute::Report> instance from a previously executed test.
+=item * L<Refute::Core::Report> instance from a previously executed test.
 
 =back
 
@@ -373,14 +373,14 @@ sub subcontract {
     my $rep;
     if ( blessed $sub and $sub->isa( "Assert::Refute::Contract" ) ) {
         $rep = $sub->apply(@args);
-    } elsif (blessed $sub and $sub->isa( "Assert::Refute::Report" ) ) {
+    } elsif (blessed $sub and $sub->isa( "Refute::Core::Report" ) ) {
         $self->_croak("pre-executed subcontract cannot take args")
             if @args;
         $self->_croak("pre-executed subcontract must be finished")
             unless $sub->is_done;
         $rep = $sub;
     } elsif (UNIVERSAL::isa( $sub, 'CODE' )) {
-        $rep = Assert::Refute::Report->new->set_parent($self);
+        $rep = Refute::Core::Report->new->set_parent($self);
         eval {
             # This is ripoff of do_run - maybe just call do_run here
             local $Assert::Refute::DRIVER = $rep;
@@ -735,7 +735,7 @@ Returns self.
 
 Example usage is
 
-    Assert::Refute::Report->new->run( sub {
+    Refute::Core::Report->new->run( sub {
         like $this, qr/.../;
         can_ok $that, qw(foo bar frobnicate);
     } );
@@ -849,7 +849,7 @@ sub _plan_to_tap {
     $report->set_parent(undef);
 
 Indicate that a contract is part of a larger one.
-The parent object should be an L<Assert::Refute::Report> instance.
+The parent object should be an L<Refute::Core::Report> instance.
 The parent object reference will be weakened to avoid memory leak.
 
 Provide C<undef> as argument to erase parent information.
@@ -941,4 +941,4 @@ L<http://www.perlfoundation.org/artistic_license_2_0>
 
 =cut
 
-1; # End of Assert::Refute::Report
+1; # End of Refute::Core::Report

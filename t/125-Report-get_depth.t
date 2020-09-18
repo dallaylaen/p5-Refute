@@ -4,11 +4,11 @@ use strict;
 use warnings;
 use Test::More;
 
-use Assert::Refute::Report;
+use Refute::Core::Report;
 
-my $main = Assert::Refute::Report->new;
-my $outer = Assert::Refute::Report->new;
-my $inner = Assert::Refute::Report->new;
+my $main = Refute::Core::Report->new;
+my $outer = Refute::Core::Report->new;
+my $inner = Refute::Core::Report->new;
 
 $outer->set_parent( $main );
 $inner->set_parent( $outer );

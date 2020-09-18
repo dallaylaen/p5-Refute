@@ -10,7 +10,7 @@ use Assert::Refute;
 
 subtest "passing refutation" => sub {
     my $capture;
-    my $rep = Assert::Refute::Report->new;
+    my $rep = Refute::Core::Report->new;
     my $ret_val = $rep->do_run( sub {
         $capture = current_contract;
         refute 0, "IF YOU SEE THIS MESSAGE, TESTS FAILED";
@@ -22,7 +22,7 @@ subtest "passing refutation" => sub {
 };
 
 subtest "failing refutation" => sub {
-    my $rep = Assert::Refute::Report->new;
+    my $rep = Refute::Core::Report->new;
 
     $rep->do_run( sub {
         refute 1, "IF YOU SEE THIS MESSAGE, TESTS FAILED";
@@ -34,7 +34,7 @@ subtest "failing refutation" => sub {
 subtest "exception in contract" => sub {
     my $rep;
     eval {
-        $rep = Assert::Refute::Report->new;
+        $rep = Refute::Core::Report->new;
         $rep->do_run( sub {
             die "Foobared"
         } );
