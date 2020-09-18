@@ -17,8 +17,6 @@ It is mutable, but can only changed in one way
 Eventually a C<done_testing> locks it completely, leaving only
 L</QUERYING PRIMITIVES> for inspection.
 
-See L<Assert::Refute::Contract> for contract I<definition>.
-
 =head1 SYNOPSIS
 
     my $c = Refute::Core::Report->new;
@@ -347,11 +345,6 @@ Exceptions are rethrown, leaving a failed contract behind.
         # run some checks here
     } );
 
-=item * L<Assert::Refute::Contract> instance - apply() will be called;
-
-As of v.0.15, contract swallows exceptions, leaving behind a failed
-contract report only. This MAY change in the future.
-
 =item * L<Refute::Core::Report> instance from a previously executed test.
 
 =back
@@ -371,9 +364,7 @@ sub subcontract {
 
     my $rethrow;
     my $rep;
-    if ( blessed $sub and $sub->isa( "Assert::Refute::Contract" ) ) {
-        $rep = $sub->apply(@args);
-    } elsif (blessed $sub and $sub->isa( "Refute::Core::Report" ) ) {
+    if (blessed $sub and $sub->isa( "Refute::Core::Report" ) ) {
         $self->_croak("pre-executed subcontract cannot take args")
             if @args;
         $self->_croak("pre-executed subcontract must be finished")

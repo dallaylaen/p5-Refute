@@ -60,8 +60,6 @@ It also handles runtime assertions.
 * `Refute::Builder` - helper module to build more test conditions
 (those would also work fine under Test::More).
 
-* `Assert::Refute::Contract` - implementations of contract *specification*.
-
 * `Refute::Core::Report` - implementation of contract execution *report*.
 This is where `refute` is implemented.
 

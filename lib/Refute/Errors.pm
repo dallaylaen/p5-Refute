@@ -52,7 +52,6 @@ use parent qw(Exporter);
 our @EXPORT = qw(foobar);
 
 use Refute::Builder;
-use Assert::Refute::Contract;
 
 =head2 dies_like
 
@@ -111,17 +110,6 @@ This MAY change in the future.
 
 =cut
 
-# TODO better diagnostic
-my $multi_like = Assert::Refute::Contract->new( code => sub {
-    my ($self, $got, $exp) = @_;
-
-    for (my $i = 0; $i < @$got or $i < @$exp; $i++) {
-        defined $exp->[$i]
-            ? $self->like( $got->[$i], $exp->[$i] )
-            : $self->is ( $got->[$i], undef );
-    };
-}, need_object => 1 );
-
 build_refute warns_like => sub {
     my ($block, $exp) = @_;
 
@@ -135,8 +123,18 @@ build_refute warns_like => sub {
         $block->();
     };
 
-    my $c = $multi_like->apply( \@warn, $exp );
-    return $c->is_passing ? '' : $c->get_tap;
+    my @mismatch;
+    if (@warn != @$exp) {
+        push @mismatch, "Expected ".(scalar @$exp || "no")." warnings, found ".(scalar @warn);
+    };
+
+    for( my $i = 0; $i < @warn and $i < @$exp; $i++ ) {
+        push @mismatch, "Warning[$i]: $warn[$i]", "doesn't match", $exp->[$i]
+            unless $warn[$i] =~ $exp->[$i];
+    };
+
+    # TODO also print @warn as note on success
+    return @mismatch ? \@mismatch : '';
 }, block => 1, args => 1, export => 1;
 
 =head1 LICENSE AND COPYRIGHT

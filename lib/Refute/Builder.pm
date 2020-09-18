@@ -222,7 +222,7 @@ sub build_refute(@) { ## no critic # Moose-like DSL for the win!
     };
     if ($todo_carp_not) {
         no warnings 'once';
-        push @{ $target."::CARP_NOT" }, "Assert::Refute::Contract", $class;
+        push @{ $target."::CARP_NOT" }, $class;
     };
 
     # magic ends here

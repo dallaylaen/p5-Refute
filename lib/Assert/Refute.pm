@@ -404,39 +404,6 @@ sub refute_and_report (&;@) { ## no critic # need prototype
     return Refute::Core::Report->new->do_run($block);
 };
 
-=head2 contract { ... }
-
-Save a contract BLOCK for future use:
-
-    my $contract = contract {
-        my ($foo, $bar) = @_;
-        # conditions here
-    };
-
-    # much later
-    my $report = $contract->apply( $real_foo, $real_bar );
-    # Returns an Refute::Core::Report with conditions applied
-
-This is similar to how C<prepare> / C<execute> works in L<DBI>.
-
-B<[DEPRECATED]> This function will disappear in v.0.20.
-
-Prior to advent of C<try_refute>, this call used to be the main entry point
-to this module.
-This is no more the case, and a simple subroutine containing assertions
-would fit in most places where C<contract> is appropriate.
-
-Use L<Assert::Refute::Contract/contract> instead.
-
-=cut
-
-sub contract (&@) { ## no critic
-    carp "contract{ ... } is DEPRECATED, use Assert::Refute::Contract::contract instead";
-
-    require Assert::Refute::Contract;
-    goto &Assert::Refute::Contract::contract;
-};
-
 =head2 plan tests => $n
 
 Plan to run exactly C<n> assertions within a contract block.
@@ -505,8 +472,7 @@ This is similar to C<subtest> in L<Test::More>.
 B<[NOTE]> that the message comes first, unlike in C<refute>
 or other assertion types, and is I<required>.
 
-A I<contract> may be an L<Assert::Refute::Contract> object,
-a plain subroutine with some assertions inside, or
+A I<contract> may be a a code block with some assertions inside, or
 an L<Refute::Core::Report> instance from a previous contract run.
 
 A subroutine MUST accept an empty L<Refute::Core::Report> object.
