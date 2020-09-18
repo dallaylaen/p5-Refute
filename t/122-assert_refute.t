@@ -22,7 +22,7 @@ subtest "Failing runtime assertion" => sub {
 
     my $report = assert_refute {
         package T;
-        use Assert::Refute::T::Basic;
+        use Refute::Common;
 
         is 42, 137, $all_good;
     };
@@ -36,7 +36,7 @@ subtest "Passing runtime assertion" => sub {
 
     my $report = assert_refute {
         package T;
-        use Assert::Refute::T::Basic;
+        use Refute::Common;
 
         is 42, 42, $all_good;
     };
@@ -52,7 +52,7 @@ subtest "Dying runtime assertion" => sub {
     my $report = eval {
         assert_refute {
             package T;
-            use Assert::Refute::T::Basic;
+            use Refute::Common;
 
             is 42, 42, $all_good;
             die "You shall not pass";

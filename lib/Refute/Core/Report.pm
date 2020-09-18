@@ -46,7 +46,7 @@ use Scalar::Util qw( blessed weaken );
 use Refute::Builder qw(to_scalar);
 
 # Always add basic testing primitives to the arsenal
-require Assert::Refute::T::Basic;
+require Refute::Common;
 
 my $ERROR_DONE = "done_testing was called, no more changes may be added";
 
@@ -323,7 +323,7 @@ C<is>, C<isnt>, C<ok>, C<use_ok>, C<require_ok>, C<cmp_ok>,
 C<like>, C<unlike>, C<can_ok>, C<isa_ok>, C<new_ok>,
 C<contract_is>, C<is_deeply>, C<fail>, C<pass>, C<note>, C<diag>.
 
-See L<Assert::Refute::T::Basic> for more details.
+See L<Refute::Common> for more details.
 
 Additionally, I<any> checks defined using L<Refute::Builder>
 will be added to L<Refute::Core::Report> as methods

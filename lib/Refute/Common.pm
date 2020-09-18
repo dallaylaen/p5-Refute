@@ -1,4 +1,4 @@
-package Assert::Refute::T::Basic;
+package Refute::Common;
 
 use 5.006;
 use strict;
@@ -7,7 +7,7 @@ our $VERSION = '0.17';
 
 =head1 NAME
 
-Assert::Refute::T::Basic - a set of most common checks for Assert::Refute suite
+Refute::Common - a set of most common checks for Assert::Refute suite
 
 =head1 DESCRIPTION
 

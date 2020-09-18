@@ -7,7 +7,7 @@ use Test::More;
 use Assert::Refute qw(:core);
 {
     package Foo;
-    use Assert::Refute::T::Basic;
+    use Refute::Common;
 }
 
 my $report;

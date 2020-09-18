@@ -125,7 +125,7 @@ C<is>, C<isnt>, C<ok>, C<use_ok>, C<require_ok>, C<cmp_ok>,
 C<like>, C<unlike>, C<can_ok>, C<isa_ok>, C<new_ok>,
 C<is_deeply>, C<fail>, C<pass>, C<note>, C<diag>.
 
-See L<Assert::Refute::T::Basic> for more.
+See L<Refute::Common> for more.
 
 This distribution also bundles some extra assertions:
 
@@ -150,10 +150,10 @@ use Exporter;
 
 use Refute::Core::Report;
 use Refute::Builder qw(current_contract);
-use Assert::Refute::T::Basic;
+use Refute::Common;
 
 my @basic = (
-    @Assert::Refute::T::Basic::EXPORT, 'plan'
+    @Refute::Common::EXPORT, 'plan'
 );
 my @core  = qw(
     contract refute_these try_refute
@@ -558,7 +558,7 @@ See L<Refute::Core::Report/get_sign> for signature format.
 
 This may be useful for verifying assertions and contracts themselves.
 
-This is actually a clone of L<Assert::Refute::T::Basic/contract_is>.
+This is actually a clone of L<Refute::Common/contract_is>.
 
 =cut
 

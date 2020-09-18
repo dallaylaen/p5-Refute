@@ -7,7 +7,7 @@ use warnings FATAL => 'recursion';
 
 # Avoid Test::More detection
 use Refute::Builder qw(to_scalar);
-use Assert::Refute::T::Basic qw(deep_diff);
+use Refute::Common qw(deep_diff);
 use Refute::Core::Report;
 
 use Test::More;
