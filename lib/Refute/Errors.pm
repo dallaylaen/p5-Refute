@@ -1,4 +1,4 @@
-package Assert::Refute::T::Errors;
+package Refute::Errors;
 
 use 5.006;
 use strict;
@@ -7,12 +7,12 @@ our $VERSION = '0.17';
 
 =head1 NAME
 
-Assert::Refute::T::Errors - exception and warning check for Assert::Refute suite
+Refute::Errors - exception and warning check for Assert::Refute suite
 
 =head1 SYNOPSIS
 
     use Assert::Refute qw(:all);
-    use Assert::Refute::T::Errors;
+    use Refute::Errors;
 
     my $c = contract {
         my $foo = shift;
@@ -30,7 +30,7 @@ Ditto with L<Test::More> (although there are more fine-grained L<Test::Warn>
 and L<Test::Exception>):
 
     use Test::More;
-    use Assert::Refute::T::Errors; # always *after* Test::More
+    use Refute::Errors; # always *after* Test::More
 
     use My::Module;
 

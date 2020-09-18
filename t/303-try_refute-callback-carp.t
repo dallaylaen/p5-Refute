@@ -5,7 +5,7 @@ use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More tests => 2;
 
-use Assert::Refute::T::Errors;
+use Refute::Errors;
 
 {
     package T;

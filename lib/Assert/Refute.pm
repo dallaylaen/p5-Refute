@@ -133,7 +133,7 @@ This distribution also bundles some extra assertions:
 
 =item * L<Assert::Refute::T::Array> - inspect list structure;
 
-=item * L<Assert::Refute::T::Errors> - verify exceptions and warnings;
+=item * L<Refute::Errors> - verify exceptions and warnings;
 
 =item * L<Assert::Refute::T::Hash> - inspect hash keys and values;
 

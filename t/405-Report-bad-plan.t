@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use Test::More;
-use Assert::Refute::T::Errors;
+use Refute::Errors;
 
 use Refute::Core::Report;
 

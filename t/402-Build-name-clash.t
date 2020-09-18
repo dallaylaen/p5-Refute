@@ -6,7 +6,7 @@ BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More;
 
 use Refute::Builder qw(build_refute);
-use Assert::Refute::T::Errors;
+use Refute::Errors;
 
 dies_like {
     build_refute is_taken => sub {1};

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More;
-use Assert::Refute::T::Errors;
+use Refute::Errors;
 
 use Assert::Refute qw(contract);
 

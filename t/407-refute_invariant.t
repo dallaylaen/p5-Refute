@@ -5,7 +5,7 @@ use warnings;
 BEGIN { undef @ENV{ qw{NDEBUG PERL_NDEBUG} } };
 use Test::More;
 
-use Assert::Refute::T::Errors qw(dies_like);
+use Refute::Errors qw(dies_like);
 
 dies_like {
     package T;

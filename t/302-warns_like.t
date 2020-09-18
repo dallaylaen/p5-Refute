@@ -6,7 +6,7 @@ use Test::More;
 use Carp;
 
 use Assert::Refute qw(:core);
-use Assert::Refute::T::Errors;
+use Refute::Errors;
 
 my $report = refute_and_report {
     warns_like {
