@@ -5,7 +5,7 @@ use warnings;
 use Test::More;
 use Carp;
 
-use Assert::Refute qw(:core);
+use Refute qw(:core);
 use Refute::Errors;
 
 my $report = refute_and_report {

@@ -8,9 +8,9 @@ use Refute::Errors;
 
 {
     package Foo;
-    use Assert::Refute { on_pass => 'carp', on_fail => 'croak' }, ":all";
+    use Refute { on_pass => 'carp', on_fail => 'croak' }, ":all";
     package Bar;
-    use Assert::Refute { on_pass => 'croak', on_fail => '' }, ":all";
+    use Refute { on_pass => 'croak', on_fail => '' }, ":all";
 }
 
 dies_like {

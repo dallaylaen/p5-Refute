@@ -4,15 +4,15 @@ use strict;
 use warnings;
 use Test::More;
 
-use Assert::Refute qw(:core);
+use Refute qw(:core);
 
 my $report = refute_and_report {
     package T;
     my $self = shift;
 
-    $self->use_ok( "Assert::Refute");
-    $self->use_ok( "Assert::Refute", 0.01 );
-    $self->use_ok( "Assert::Refute", "no_such_method" );
+    $self->use_ok( "Refute");
+    $self->use_ok( "Refute", 0.01 );
+    $self->use_ok( "Refute", "no_such_method" );
     $self->ok(1, "Lived until here");
 };
 

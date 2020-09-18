@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 # Load BEFORE T::M to avoid detecting it
-use Assert::Refute qw(:core);
+use Refute qw(:core);
 
 use Test::More;
 use Scalar::Util qw(refaddr);

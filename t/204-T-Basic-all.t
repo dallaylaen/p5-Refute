@@ -4,12 +4,12 @@ use strict;
 use warnings;
 use Test::More;
 
-use Assert::Refute qw(refute_and_report);
+use Refute qw(refute_and_report);
 
 {
     # Be extra careful not to pollute the main namespace
     package T;
-    use Assert::Refute qw(:all);
+    use Refute qw(:all);
 };
 
 my $report;
@@ -114,8 +114,8 @@ $report = refute_and_report {
     package T;
     can_ok current_contract, "can_ok";
     can_ok current_contract, "frobnicate";
-    can_ok "Assert::Refute", "import", "can_ok";
-    can_ok "Assert::Refute", "unknown_subroutine";
+    can_ok "Refute", "import", "can_ok";
+    can_ok "Refute", "unknown_subroutine";
     can_ok "No::Exist", "can", "isa", "import";
 };
 is $report->get_sign, "t1N1NNd", "can_ok()";
@@ -132,7 +132,7 @@ note $report->get_tap;
 
 $report = refute_and_report {
     package T;
-    require_ok "Assert::Refute"; # already loaded
+    require_ok "Refute"; # already loaded
     require_ok "No::Such::Package::_______::000";
 };
 is $report->get_sign, "t1Nd", "require_ok()";

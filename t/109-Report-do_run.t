@@ -6,7 +6,7 @@ BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More tests => 3;
 use Scalar::Util qw(refaddr);
 
-use Assert::Refute;
+use Refute;
 
 subtest "passing refutation" => sub {
     my $capture;

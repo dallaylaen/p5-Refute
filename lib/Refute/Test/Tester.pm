@@ -102,7 +102,7 @@ sub _test_test {
     croak "test_test(): diag() must be an array of strings and/or regular expressions"
         if $diag and ref $diag ne 'ARRAY';
 
-    $external_name ||= "Assert::Refute contract entry as expected";
+    $external_name ||= "Refute contract entry as expected";
 
     $self->subcontract( $external_name => sub {
         my $rep = shift;
@@ -144,7 +144,7 @@ sub _like_or_ok {
 
 =head1 LICENSE AND COPYRIGHT
 
-This module is part of L<Assert::Refute> suite.
+This module is part of L<Refute> suite.
 
 Copyright 2017-2018 Konstantin S. Uvarin. C<< <khedin at cpan.org> >>
 

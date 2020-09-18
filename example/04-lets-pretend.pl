@@ -6,7 +6,7 @@
 use strict;
 use warnings;
 use POSIX qw(strftime);
-use Assert::Refute { on_fail => 'carp' };
+use Refute { on_fail => 'carp' };
 
 # Let's pretend this is a huge enterprise logger (syslog, log4perl, or both)
 $SIG{__WARN__} = sub {

@@ -6,23 +6,23 @@ BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More;
 use Refute::Errors;
 
-use Assert::Refute qw();
+use Refute qw();
 
 my $sub = sub { warn "Foobared" };
 
 {
     package T;
-    Assert::Refute->configure({on_pass=>$sub});
+    Refute->configure({on_pass=>$sub});
 };
 
-is( Assert::Refute->get_config( "T" )->{on_pass}, $sub
+is( Refute->get_config( "T" )->{on_pass}, $sub
     , "get_config another package" );
 
-ok( !Assert::Refute->get_config()->{on_pass}, "get_config caller - gets empty" );
+ok( !Refute->get_config()->{on_pass}, "get_config caller - gets empty" );
 
 dies_like {
     package T;
-    Assert::Refute->configure( { foobared => 137 } );
-} qr/Assert::Refute.*[Uu]nknown.*foobared/, "Unknown param = no go";
+    Refute->configure( { foobared => 137 } );
+} qr/Refute.*[Uu]nknown.*foobared/, "Unknown param = no go";
 
 done_testing;

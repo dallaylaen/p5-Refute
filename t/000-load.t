@@ -8,7 +8,7 @@ use Test::More;
 plan tests => 1;
 
 BEGIN {
-    require_ok( 'Assert::Refute' ) || print "Bail out!\n";
+    require_ok( 'Refute' ) || print "Bail out!\n";
 }
 
-diag( "Testing Assert::Refute $Assert::Refute::VERSION, Perl $], $^X" );
+diag( "Testing Refute $Refute::VERSION, Perl $], $^X" );

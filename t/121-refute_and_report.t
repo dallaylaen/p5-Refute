@@ -6,7 +6,7 @@ use Test::More;
 use Scalar::Util qw(refaddr);
 use Carp;
 
-use Assert::Refute qw(refute_and_report), {
+use Refute qw(refute_and_report), {
     on_pass => sub { Carp::confess("on_pass callback fired when it shouldn't") },
     on_fail => sub { Carp::confess("on_fail callback fired when it shouldn't") },
 };

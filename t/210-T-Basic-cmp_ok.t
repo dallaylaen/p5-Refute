@@ -2,12 +2,12 @@
 
 use strict;
 use warnings;
-use Assert::Refute qw(:core);
+use Refute qw(:core);
 use Test::More;
 
 my $report = refute_and_report {
     package T;
-    use Assert::Refute qw(:all);
+    use Refute qw(:all);
     cmp_ok 1, "<", 2;
     cmp_ok 2, "<", 1;
     cmp_ok "a", "lt", "b";

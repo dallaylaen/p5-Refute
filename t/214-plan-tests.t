@@ -2,13 +2,13 @@
 
 use strict;
 use warnings;
-use Assert::Refute ":core";
+use Refute ":core";
 
 use Test::More;
 
 my $fail = refute_and_report {
     package T;
-    use Assert::Refute qw(:all);
+    use Refute qw(:all);
     plan tests => 2;
     ok 1;
 };
@@ -21,7 +21,7 @@ is $fail->get_error, "Looks like you planned 2 tests but ran 1",
 
 my $pass = refute_and_report {
     package T;
-    use Assert::Refute qw(:all);
+    use Refute qw(:all);
     plan tests => 2;
     ok 1;
     ok 2;

@@ -7,7 +7,7 @@ our $VERSION = '0.17';
 
 =head1 NAME
 
-Refute::Builder - tool for extending Assert::Refute suite
+Refute::Builder - tool for extending Refute suite
 
 =head1 DESCRIPTION
 
@@ -15,7 +15,7 @@ Although arbitrary checks may be created using just the C<refute> function,
 they may be cumbersome to use and especially share.
 
 This module takes care of some boilerplate as well as maintains parity
-between functional and object-oriented interfaces of L<Assert::Refute>.
+between functional and object-oriented interfaces of L<Refute>.
 
 =head1 SYNOPSIS
 
@@ -34,7 +34,7 @@ Extending the test suite goes as follows:
 
 This can be later used inside production code to check a condition:
 
-    use Assert::Refute qw(:all);
+    use Refute qw(:all);
     use My::Package;
     my $fun_check = contract {
         is_everything( shift );
@@ -96,7 +96,7 @@ are as close to each other as possible.
 
 =back
 
-As a side effect, Assert::Refute's internals are added to the caller's
+As a side effect, Refute's internals are added to the caller's
 C<@CARP_NOT> array so that carp/croak points to where the built function
 is actually used.
 
@@ -113,7 +113,7 @@ Options may include:
 =item * C<export_ok> => 1 - add function to @EXPORT_OK (don't export by default).
 
 =item * C<no_create> => 1 - don't generate a function at all, just add to
-L<Assert::Refute>'s methods.
+L<Refute>'s methods.
 
 =item * C<manual> => 1 - don't generate any code.
 Instead, assume that user has already done that and just add a method
@@ -184,12 +184,12 @@ sub build_refute(@) { ## no critic # Moose-like DSL for the win!
         return $self->refute( scalar $cond->(@_), $message );
     };
     my $wrapper = $opt{manual} ? sub {
-        return $cond->( $Assert::Refute::DRIVER || current_contract(), @_ );
+        return $cond->( $Refute::DRIVER || current_contract(), @_ );
     } : sub {
         my $message; $message = pop unless @_ <= $nargs;
         return (
             # Ugly hack for speed in happy case
-            $Assert::Refute::DRIVER || current_contract()
+            $Refute::DRIVER || current_contract()
         )->refute( scalar $cond->(@_), $message );
     };
     if (!$opt{no_proto} and ($opt{block} || $opt{list} || defined $opt{args})) {
@@ -238,12 +238,12 @@ Dies if no contract is being executed at the time.
 =cut
 
 sub current_contract() { ## nocritic
-    return $Assert::Refute::DRIVER if $Assert::Refute::DRIVER;
+    return $Refute::DRIVER if $Refute::DRIVER;
 
     # Would love to just die, but...
     if ($MORE_DETECTED) {
         require Refute::Report::Test::More;
-        return $Assert::Refute::DRIVER = Refute::Report::Test::More->new;
+        return $Refute::DRIVER = Refute::Report::Test::More->new;
     };
 
     croak "Not currently testing anything";
@@ -291,7 +291,7 @@ sub to_scalar {
 
 =head1 LICENSE AND COPYRIGHT
 
-This module is part of L<Assert::Refute> suite.
+This module is part of L<Refute> suite.
 
 Copyright 2017-2018 Konstantin S. Uvarin. C<< <khedin at cpan.org> >>
 

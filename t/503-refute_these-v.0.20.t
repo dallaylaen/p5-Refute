@@ -9,7 +9,7 @@ use Refute::Errors;
 my $report;
 dies_like {
     package T;
-    use Assert::Refute {};
+    use Refute {};
     $report = refute_these {
         refute 1, "If you see this message the tests have failed!";
     };

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More tests => 2;
 
-use Assert::Refute qw(:core);
+use Refute qw(:core);
 
 # emulate use Foo;
 BEGIN {

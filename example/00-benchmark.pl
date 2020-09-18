@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# This script gives some idea about Assert::Refute's CPU usage.
+# This script gives some idea about Refute's CPU usage.
 # It runs a contract consisting of like( $_, qr/.../ ) statements
 #     multiple times, optionally outputting a summary of each contract
 # CPU time is measured instead of wallclock time.
@@ -10,13 +10,13 @@ use strict;
 use warnings;
 use Time::HiRes qw(clock);
 use Getopt::Long;
-use Assert::Refute {}, ":all";
+use Refute {}, ":all";
 
 BEGIN {
-    if (Assert::Refute->VERSION < 0.05) {
-        die "Assert::Refute too old, can't cope: ".Assert::Refute->VERSION;
+    if (Refute->VERSION < 0.05) {
+        die "Refute too old, can't cope: ".Refute->VERSION;
     };
-    if (Assert::Refute->VERSION < 0.10) {
+    if (Refute->VERSION < 0.10) {
         *try_refute = \&refute_these;
     };
 };
@@ -44,7 +44,7 @@ $fail = $fail ? '-' : '';
 sub usage {
     print <<"USAGE"; exit 0;
 Usage: $0 [options]
-Benchmark the Assert::Refute using repeated like( \$_, qr/.../ ) statements.
+Benchmark the Refute using repeated like( \$_, qr/.../ ) statements.
 Time::HiRes::clock() is used to measure CPU usage as opposed to wallclock time.
 Options may include:
     -c, --count   - number of refutations per contract (default 100)
@@ -57,8 +57,8 @@ Options may include:
 USAGE
 };
 
-printf "Using Assert::Refute version %s under perl %s\n",
-    Assert::Refute->VERSION, $^V;
+printf "Using Refute version %s under perl %s\n",
+    Refute->VERSION, $^V;
 
 my $contract = $subtest
     ? sub {

@@ -7,11 +7,11 @@ our $VERSION = '0.17';
 
 =head1 NAME
 
-Refute::Errors - exception and warning check for Assert::Refute suite
+Refute::Errors - exception and warning check for Refute suite
 
 =head1 SYNOPSIS
 
-    use Assert::Refute qw(:all);
+    use Refute qw(:all);
     use Refute::Errors;
 
     my $c = contract {
@@ -139,7 +139,7 @@ build_refute warns_like => sub {
 
 =head1 LICENSE AND COPYRIGHT
 
-This module is part of L<Assert::Refute> suite.
+This module is part of L<Refute> suite.
 
 Copyright 2017-2018 Konstantin S. Uvarin. C<< <khedin at cpan.org> >>
 

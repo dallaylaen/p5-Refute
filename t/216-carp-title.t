@@ -5,14 +5,14 @@ use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More tests => 3;
 
-use Assert::Refute qw(assert_refute);
+use Refute qw(assert_refute);
 
 my @warn;
 my $alive = eval {
     local $SIG{__WARN__} = sub { push @warn, shift };
     assert_refute {
         package T;
-        use Assert::Refute qw(:all);
+        use Refute qw(:all);
         plan tests => 1, title => 'Foobared';
         is 42, 137, 'life is fine';
     };

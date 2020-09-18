@@ -1,4 +1,4 @@
-Revision history for Assert-Refute
+Revision history for Refute
 
 0.17    Sat Apr 20 2019
         - API Introduce experimental refute_invariant for named assertion
@@ -40,7 +40,7 @@ Revision history for Assert-Refute
         - MOD Add experimental is_deeply_diff() with extra parameter
         - API BREAK make is_deeply generate a limited, multiline report
         - API BREAK Switch to Data::Dumper instead of homegrown to_scalar
-        - API Allow perl -MAssert::Refute={} -e '...' on CLI
+        - API Allow perl -MRefute={} -e '...' on CLI
         - API BREAK Remove 'indent' argument in Report->new
         - TST Add benchmark.pl script
 
@@ -55,10 +55,10 @@ Revision history for Assert-Refute
 0.10    Mon Jun 18 2018
         - API BREAK Rename refute_these => try_refute, deprecate refute_these until 0.15
         - API BREAK Change log levels: diag{1=>-1}, not ok{-1=>-2}, fail{-2=>-3}, note{2=>1}
-        - REF Rename Assert::Refute::{Exec->Report}
+        - REF Rename Refute::{Exec->Report}
 
 0.09    Fri Mar 30 2018
-        - API BREAK refute_these requires explicit parameter hash in Assert::Refute, will just generate report in the future
+        - API BREAK refute_these requires explicit parameter hash in Refute, will just generate report in the future
         - BUG warns_like ignored extra/absent warnings
         - BUG Improve diagnostics in like and unlike MINOR
 
@@ -124,7 +124,7 @@ Revision history for Assert-Refute
 0.02    Fri Dec 15 2017
         - API Add contract, refute, and suncontract primitives
         - API Add an arsenal of checks corresponding to that of Test::More
-        - API Add Assert::Refute::Contract/Assert::Refute::Exec oo interface
+        - API Add Refute::Contract/Refute::Exec oo interface
         - API Add Refute::Builderer to extend the checks
         - API Add signature method for testing the tests
 

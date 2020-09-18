@@ -7,7 +7,7 @@ our $VERSION = '0.17';
 
 =head1 NAME
 
-Refute::Common - a set of most common checks for Assert::Refute suite
+Refute::Common - a set of most common checks for Refute suite
 
 =head1 DESCRIPTION
 
@@ -15,7 +15,7 @@ This module contains most common test conditions similar to those in
 L<Test::More>, like C<is $got, $expected;> or C<like $got, qr/.../;>.
 
 They appear as both exportable functions in this module
-and L<Assert::Refute> itself
+and L<Refute> itself
 I<and> as corresponding methods in L<Refute::Core::Report>.
 
 =head1 FUNCTIONS
@@ -471,7 +471,7 @@ build_refute fail => sub {
 
 =head1 LICENSE AND COPYRIGHT
 
-This module is part of L<Assert::Refute> suite.
+This module is part of L<Refute> suite.
 
 Copyright 2017-2018 Konstantin S. Uvarin. C<< <khedin at cpan.org> >>
 

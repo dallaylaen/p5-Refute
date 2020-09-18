@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 
-use Assert::Refute qw(:core);
+use Refute qw(:core);
 use Refute::Errors qw(dies_like);
 
 my $report = refute_and_report {

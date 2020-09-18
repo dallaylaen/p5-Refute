@@ -5,7 +5,7 @@ use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More tests => 2;
 
-use Assert::Refute {};
+use Refute {};
 
 my @warn;
 $SIG{__WARN__} = sub { push @warn, $_[0]; warn $_[0] };

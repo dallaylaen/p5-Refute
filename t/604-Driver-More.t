@@ -11,7 +11,7 @@ BEGIN {
 };
 use Test::More;
 
-use Assert::Refute;
+use Refute;
 
 if ($no_test_tester) {
     plan skip_all => $no_test_tester;

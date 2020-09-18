@@ -5,7 +5,7 @@
 
 use strict;
 use warnings;
-use Assert::Refute ":core";
+use Refute ":core";
 
 use Test::More tests => 4;
 

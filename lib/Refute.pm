@@ -1,4 +1,4 @@
-package Assert::Refute;
+package Refute;
 
 use 5.006;
 use strict;
@@ -7,7 +7,7 @@ our $VERSION = '0.17';
 
 =head1 NAME
 
-Assert::Refute - Unified testing and assertion tool
+Refute - Unified testing and assertion tool
 
 =head1 DESCRIPTION
 
@@ -21,7 +21,7 @@ This can be though of as a lightweight design-by-contract form.
 
 The following code will die unless the conditions listed there are fulfilled:
 
-    use Assert::Refute ":all", { on_fail => 'croak' };
+    use Refute ":all", { on_fail => 'croak' };
 
     # Lots of code here
     try_refute {
@@ -39,7 +39,7 @@ giving one a fine-grained I<speed E<lt>----E<gt> accuracy> control.
 
 The same can be done without polluting the main package namespace:
 
-    use Assert::Refute { on_fail => 'croak' };
+    use Refute { on_fail => 'croak' };
 
     try_refute {
         my $report = shift;
@@ -50,7 +50,7 @@ The same can be done without polluting the main package namespace:
 
 Relying on a global (in fact, per-package) callback is not required:
 
-    use Assert::Refute {}, ":all";
+    use Refute {}, ":all";
 
     my $report = try_refute {
         # ... assertions here
@@ -100,16 +100,16 @@ See L</PERFORMANCE> below for limitations, though.
 =head1 EXPORT
 
 Any number of hash references may be added to the C<use> statement,
-resulting in an implicit C<Assert::Refute-E<gt>configure> call.
+resulting in an implicit C<Refute-E<gt>configure> call.
 A literal C<{}> will also trigger C<configure>.
 
 Everything else will be passed on to L<Exporter>.
 
-    use Assert::Refute;
+    use Refute;
 
 as well as
 
-    use Assert::Refute qw(:core);
+    use Refute qw(:core);
 
 would only export C<try_refute>, C<contract>, C<refute>,
 C<contract_is>, C<subcontract>, and C<current_contract> functions.
@@ -117,7 +117,7 @@ C<contract_is>, C<subcontract>, and C<current_contract> functions.
 Also for convenience some basic assertions mirroring the L<Test::More> suite
 are exportable via C<:all> and C<:basic> export tag.
 
-    use Assert::Refute qw(:all);
+    use Refute qw(:all);
 
 would also export the following assertions:
 
@@ -131,13 +131,13 @@ This distribution also bundles some extra assertions:
 
 =over
 
-=item * L<Assert::Refute::T::Array> - inspect list structure;
+=item * L<Refute::T::Array> - inspect list structure;
 
 =item * L<Refute::Errors> - verify exceptions and warnings;
 
-=item * L<Assert::Refute::T::Hash> - inspect hash keys and values;
+=item * L<Refute::T::Hash> - inspect hash keys and values;
 
-=item * L<Assert::Refute::T::Numeric> - make sure numbers fit certain intervals;
+=item * L<Refute::T::Numeric> - make sure numbers fit certain intervals;
 
 =back
 
@@ -181,7 +181,7 @@ $NDEBUG = $ENV{NDEBUG} unless defined $NDEBUG;
 sub import {
     my $class = shift;
 
-    # NOTE ugly hack - allow for 'use Assert::Refute {}'
+    # NOTE ugly hack - allow for 'use Refute {}'
     # this should not be needed with new assert_refute / refute_and_report API
     my %conf = ( on_fail => 'skip' );
     my (@exp, $need_conf);
@@ -191,11 +191,11 @@ sub import {
             $need_conf++;
         } elsif (!ref $_ and $_ eq '{}') {
             # TODO 0.15 remove together with auto-carp
-            $need_conf++; # allow for -MAssert::Refute={}
+            $need_conf++; # allow for -MRefute={}
         } elsif (!ref $_) {
             push @exp, $_;
         } else {
-            croak "Unexpected argument in Assert::Refute->import: ".ref $_;
+            croak "Unexpected argument in Refute->import: ".ref $_;
         };
     };
 
@@ -381,7 +381,7 @@ For instance,
 
 Or alternatively one may resort to L<Test::More>-like DSL:
 
-    use Assert::Refute qw(:all);
+    use Refute qw(:all);
     my $report = refute_and_report {
         is      $price * $amount, $total, "Numbers add up";
         like    $header, qr/<h1>/, "Header as expected";
@@ -535,7 +535,7 @@ Returns the L<Refute::Core::Report> object being worked on.
 If L<Test::Builder> has been detected and no contract block
 is executed explicitly, returns a L<Refute::Report::Test::More> instance.
 This allows to define assertions and run them uniformly under
-both L<Assert::Refute> and L<Test::More> control.
+both L<Refute> and L<Test::More> control.
 
 Dies if no contract could be detected.
 
@@ -543,16 +543,16 @@ It is actually a clone of L<Refute::Builder/current_contract>.
 
 =head1 STATIC METHODS
 
-Use these methods to configure Assert::Refute globally.
+Use these methods to configure Refute globally.
 
 =head2 configure
 
-    use Assert::Refute \%options;
-    Assert::Refute->configure( \%options );
-    Assert::Refute->configure( \%options, "My::Package");
+    use Refute \%options;
+    Refute->configure( \%options );
+    Refute->configure( \%options, "My::Package");
 
 Set per-caller configuration values for given package.
-C<configure> is called implicitly by C<use Assert::Refute { ... }>
+C<configure> is called implicitly by C<use Refute { ... }>
 if hash parameter(s) are present.
 
 %options may include:
@@ -627,7 +627,7 @@ sub configure {
     };
 
     if ($NDEBUG and !$conf->{skip_all}) {
-        $conf->{skip_all} = "Assert::Refute turned off via NDEBUG=$NDEBUG";
+        $conf->{skip_all} = "Refute turned off via NDEBUG=$NDEBUG";
     };
 
     if ($conf->{skip_all}) {
@@ -798,13 +798,13 @@ CPAN distributions now:
 
 =over
 
-=item * L<Assert::Refute::T::Array>
+=item * L<Refute::T::Array>
 
-=item * L<Assert::Refute::T::Hash>
+=item * L<Refute::T::Hash>
 
-=item * L<Assert::Refute::T::Numeric>
+=item * L<Refute::T::Numeric>
 
-=item * L<Assert::Refute::T::Scalar>
+=item * L<Refute::T::Scalar>
 
 =back
 
@@ -831,7 +831,7 @@ to browse old bugs or report new ones.
 
 You can find documentation for this module with the C<perldoc> command.
 
-    perldoc Assert::Refute
+    perldoc Refute
 
 You can also look for information at:
 
@@ -842,19 +842,19 @@ L<Github|https://github.com/dallaylaen/assert-refute-perl/>!
 
 =item * C<RT>: CPAN's request tracker (report bugs here)
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Assert-Refute>
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Refute>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/Assert-Refute>
+L<http://annocpan.org/dist/Refute>
 
 =item * CPAN Ratings
 
-L<http://cpanratings.perl.org/d/Assert-Refute>
+L<http://cpanratings.perl.org/d/Refute>
 
 =item * Search CPAN
 
-L<https://metacpan.org/pod/Assert::Refute>
+L<https://metacpan.org/pod/Refute>
 
 =back
 
@@ -915,4 +915,4 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut
 
-1; # End of Assert::Refute
+1; # End of Refute

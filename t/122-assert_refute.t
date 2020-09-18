@@ -7,10 +7,10 @@ use Scalar::Util qw(refaddr);
 use Carp;
 
 BEGIN { delete @ENV{qw{ NDEBUG PERL_NDEBUG }} };
-use Assert::Refute qw(assert_refute);
+use Refute qw(assert_refute);
 
 our %cb; # for local
-Assert::Refute->configure({
+Refute->configure({
     on_pass => sub { $cb{pass}++ },
     on_fail => sub { $cb{fail}++ },
 });

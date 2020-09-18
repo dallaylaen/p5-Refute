@@ -1,6 +1,6 @@
 # NAME
 
-**Assert::Refute** - unified testing, assertion, and design-by-contract tool
+**Refute** - unified testing, assertion, and design-by-contract tool
 
 # SYNOPSIS
 
@@ -8,7 +8,7 @@ This module allows to create snippets of code called *contracts*
 that behave just as a unit test would,
 but do not require the enclosing code to be a unit test:
 
-    use Assert::Refute qw(:all) { on_fail => 'croak' };
+    use Refute qw(:all) { on_fail => 'croak' };
 
     # deep in the production code
     my $data = Some::Module->bloated_untestable_sub;
@@ -54,7 +54,7 @@ To install this module, run the following commands:
 
 The modules include:
 
-* `Assert::Refute` - the main frontend with a lot of exports.
+* `Refute` - the main frontend with a lot of exports.
 It also handles runtime assertions.
 
 * `Refute::Builder` - helper module to build more test conditions
@@ -63,14 +63,14 @@ It also handles runtime assertions.
 * `Refute::Core::Report` - implementation of contract execution *report*.
 This is where `refute` is implemented.
 
-* `Assert::Refute::Driver::*` - assertion/testing protocol implementations
+* `Refute::Driver::*` - assertion/testing protocol implementations
 (currently only Test::More compatibility layer there).
 
-* `Assert::Refute::T::*` - extra conditions and checks.
+* `Refute::T::*` - extra conditions and checks.
 
 # SUPPORT AND DOCUMENTATION
 
-See https://metacpan.org/pod/Assert::Refute
+See https://metacpan.org/pod/Refute
 
 This package is under heavy development.
 Bugs may be lurking!

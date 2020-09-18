@@ -14,17 +14,17 @@ use Test::More;
 # Make sure to work under cover -t
 $ENV{HARNESS_PERL_SWITCHES} ||= '';
 
-# Calculate where Assert::Refute loads from
+# Calculate where Refute loads from
 my $path;
 eval {
-    my $mod = 'Assert/Refute.pm';
+    my $mod = 'Refute.pm';
     require $mod;
     my $full = $INC{$mod};
     $full =~ s#/\Q$mod\E$## or die "Cannot determine location from path $full";
     $path = $full;
 } || do {
     plan tests => 1;
-    ok 0, "Failed to load Assert::Refute: $@";
+    ok 0, "Failed to load Refute: $@";
     exit 1;
 };
 
@@ -34,13 +34,13 @@ if ($path =~ /["'\$]/) {
 };
 
 # This boilerplate protects from printing to STDERR
-# And also lets Assert::Refute know it's under Test::More
+# And also lets Refute know it's under Test::More
 my $preamble = <<"PERL";
 BEGIN {open STDERR, q{>&STDOUT} or die \$!};
 use Test::More;
 use warnings FATAL=>qw(all);
 use lib q{$path};
-use Assert::Refute;
+use Refute;
 
 PERL
 # Avoid variable interpolation

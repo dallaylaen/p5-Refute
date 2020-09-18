@@ -9,7 +9,7 @@ use Refute::Errors;
 
 {
     package T;
-    use Assert::Refute qw(:all), { on_fail => 'carp' };
+    use Refute qw(:all), { on_fail => 'carp' };
 };
 
 warns_like {

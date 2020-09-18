@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 
-use Assert::Refute qw(:core);
+use Refute qw(:core);
 {
     package Foo;
     use Refute::Common;

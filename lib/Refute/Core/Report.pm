@@ -7,7 +7,7 @@ our $VERSION = '0.17';
 
 =head1 NAME
 
-Refute::Core::Report - Contract execution class for Assert::Refute suite
+Refute::Core::Report - Contract execution class for Refute suite
 
 =head1 DESCRIPTION
 
@@ -31,7 +31,7 @@ L</QUERYING PRIMITIVES> for inspection.
 
 =cut
 
-# Now this module is the CORE of Assert::Refute.
+# Now this module is the CORE of Refute.
 # There are 3 things for which performance matters:
 # 1) new()
 # 2) refute( 0, ... )
@@ -137,7 +137,7 @@ An inverted assertion. That is, it B<passes> if C<$condition> is B<false>.
 Returns inverse of first argument.
 Dies if L</done_testing> was called.
 
-See L<Assert::Refute/refute> for more detailed discussion.
+See L<Refute/refute> for more detailed discussion.
 
 =cut
 
@@ -309,7 +309,7 @@ sub set_title {
 
 =head2 TESTING PRIMITIVES
 
-L<Assert::Refute> comes with a set of basic checks
+L<Refute> comes with a set of basic checks
 similar to that of L<Test::More>, all being wrappers around
 L</refute> discussed above.
 They are available as both prototyped functions (if requested) I<and>
@@ -374,7 +374,7 @@ sub subcontract {
         $rep = Refute::Core::Report->new->set_parent($self);
         eval {
             # This is ripoff of do_run - maybe just call do_run here
-            local $Assert::Refute::DRIVER = $rep;
+            local $Refute::DRIVER = $rep;
             $sub->($rep, @args);
             $rep->done_testing(0);
             1;
@@ -736,7 +736,7 @@ Example usage is
 sub do_run {
     my ($self, $code, @args) = @_;
 
-    local $Assert::Refute::DRIVER = $self;
+    local $Refute::DRIVER = $self;
     $code->($self, @args);
     $self->done_testing(0);
 
@@ -920,7 +920,7 @@ sub _croak {
 
 =head1 LICENSE AND COPYRIGHT
 
-This module is part of L<Assert::Refute> suite.
+This module is part of L<Refute> suite.
 
 Copyright 2017-2018 Konstantin S. Uvarin. C<< <khedin at cpan.org> >>
 

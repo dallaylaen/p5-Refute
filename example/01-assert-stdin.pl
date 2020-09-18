@@ -27,7 +27,7 @@ that is printed at the end.
 
 # This imports Test::More sibling subs
 #    use qw(:core) or just omit the argument to keep namespace clean
-use Assert::Refute qw(:all), { on_fail => 'carp' };
+use Refute qw(:all), { on_fail => 'carp' };
 
 my %list;
 while (<>) {
@@ -46,7 +46,7 @@ while (<>) {
     # This issues a warning if conditions aren't met
     my $report = try_refute {
         # Can copy these to a Test::More script, *verbatim*
-        # You'll still need Assert::Refute for refute (antonym of ok) though
+        # You'll still need Refute for refute (antonym of ok) though
         like $name, qr/^[a-z][a-z_0-9]*$/i, "Name is an identifier";
         refute $list{$name}, "Value not set for name";
         ok $base, "Base is nonzero";

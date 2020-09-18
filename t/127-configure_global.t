@@ -5,16 +5,16 @@ use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More tests => 2;
 
-require Assert::Refute;
+require Refute;
 
 my $cb = sub { };
 
-Assert::Refute->configure_global( { on_pass => $cb, on_fail => $cb } );
+Refute->configure_global( { on_pass => $cb, on_fail => $cb } );
 
 subtest "empty package" => sub {
     my $conf = do {
         package Foo;
-        Assert::Refute->get_config;
+        Refute->get_config;
     };
     is +$conf->{on_pass}, $cb, "callback unchanged";
 };
@@ -22,8 +22,8 @@ subtest "empty package" => sub {
 subtest "redefine on_fail" => sub {
     my $conf = do {
         package Foo;
-        Assert::Refute->configure( { on_fail => 'croak' } );
-        Assert::Refute->get_config;
+        Refute->configure( { on_fail => 'croak' } );
+        Refute->get_config;
     };
     is +$conf->{on_pass}, $cb, "callback unchanged";
     isnt +$conf->{on_fail}, $cb, "callback redefined";

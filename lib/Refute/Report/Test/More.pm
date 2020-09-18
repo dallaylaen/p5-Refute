@@ -14,7 +14,7 @@ Refute::Report::Test::More - Test::More compatibility layer for Asser::Refute su
 In your test script:
 
     use Test::More;
-    use Assert::Refute qw(:all); # in that order
+    use Refute qw(:all); # in that order
 
     my $def = contract {
         # don't use is/ok/etc here
@@ -33,8 +33,8 @@ In your test script:
 =head1 DESCRIPTION
 
 This class is useless in and of itself.
-It is auto-loaded as a bridge between L<Test::More> and L<Assert::Refute>,
-B<if> Test::More has been loaded B<before> Assert::Refute.
+It is auto-loaded as a bridge between L<Test::More> and L<Refute>,
+B<if> Test::More has been loaded B<before> Refute.
 
 =head1 METHODS
 
@@ -191,7 +191,7 @@ sub get_result {
 
 =head1 LICENSE AND COPYRIGHT
 
-This module is part of L<Assert::Refute> suite.
+This module is part of L<Refute> suite.
 
 Copyright 2017-2018 Konstantin S. Uvarin. C<< <khedin at cpan.org> >>
 
