@@ -46,7 +46,7 @@ use parent qw(Exporter);
 
 use Refute::Core::Report;
 
-our @CARP_NOT = qw(Assert::Refute Assert::Refute::Build);
+our @CARP_NOT = qw(Assert::Refute Refute::Builder);
 our @EXPORT_OK = qw(contract);
 
 =head1 EXPORT

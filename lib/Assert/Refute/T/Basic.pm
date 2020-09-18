@@ -34,7 +34,7 @@ If neither is true, an exception is thrown.
 
 In addition, a C<Refute::Core::Report-E<gt>function_name> method with
 the same signature is generated for each of them
-(see L<Assert::Refute::Build>).
+(see L<Refute::Builder>).
 
 =cut
 
@@ -42,7 +42,7 @@ use Carp;
 use Scalar::Util qw(blessed looks_like_number refaddr);
 use parent qw(Exporter);
 
-use Assert::Refute::Build;
+use Refute::Builder;
 our @EXPORT = qw( diag note );
 our @EXPORT_OK;
 

@@ -57,7 +57,7 @@ The modules include:
 * `Assert::Refute` - the main frontend with a lot of exports.
 It also handles runtime assertions.
 
-* `Assert::Refute::Build` - helper module to build more test conditions
+* `Refute::Builder` - helper module to build more test conditions
 (those would also work fine under Test::More).
 
 * `Assert::Refute::Contract` - implementations of contract *specification*.

@@ -53,7 +53,7 @@ The following functions are exported by default:
 
 use Carp;
 use parent qw(Exporter);
-use Assert::Refute::Build;
+use Refute::Builder;
 
 =head2 test_test
 

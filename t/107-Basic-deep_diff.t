@@ -6,7 +6,7 @@ BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use warnings FATAL => 'recursion';
 
 # Avoid Test::More detection
-use Assert::Refute::Build qw(to_scalar);
+use Refute::Builder qw(to_scalar);
 use Assert::Refute::T::Basic qw(deep_diff);
 use Refute::Core::Report;
 

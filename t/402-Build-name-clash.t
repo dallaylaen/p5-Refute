@@ -5,7 +5,7 @@ use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
 use Test::More;
 
-use Assert::Refute::Build qw(build_refute);
+use Refute::Builder qw(build_refute);
 use Assert::Refute::T::Errors;
 
 dies_like {

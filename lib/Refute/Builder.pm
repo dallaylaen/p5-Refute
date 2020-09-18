@@ -1,4 +1,4 @@
-package Assert::Refute::Build;
+package Refute::Builder;
 
 use 5.006;
 use strict;
@@ -7,7 +7,7 @@ our $VERSION = '0.17';
 
 =head1 NAME
 
-Assert::Refute::Build - tool for extending Assert::Refute suite
+Refute::Builder - tool for extending Assert::Refute suite
 
 =head1 DESCRIPTION
 
@@ -22,7 +22,7 @@ between functional and object-oriented interfaces of L<Assert::Refute>.
 Extending the test suite goes as follows:
 
     package My::Package;
-    use Assert::Refute::Build;
+    use Refute::Builder;
     use parent qw(Exporter);
 
     build_refute is_everything => sub {

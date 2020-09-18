@@ -3,14 +3,14 @@
 use strict;
 use warnings;
 BEGIN{ delete @ENV{qw(NDEBUG PERL_NDEBUG)} };
-use Assert::Refute::Build;
+use Refute::Builder;
 use Refute::Core::Report; # Avoid T::M detection
 use Test::More tests => 2;
 
 BEGIN {
     package Foo;
     use parent qw(Exporter);
-    use Assert::Refute::Build;
+    use Refute::Builder;
 
     build_refute even => sub {
         return $_[0] % 2;
@@ -29,7 +29,7 @@ BEGIN {
 
 eval {
     package Bar;
-    use Assert::Refute::Build;
+    use Refute::Builder;
     build_refute odd => sub { !($_[0] % 2) };
 };
 note $@;

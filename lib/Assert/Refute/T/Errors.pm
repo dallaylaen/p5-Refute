@@ -51,7 +51,7 @@ use Carp;
 use parent qw(Exporter);
 our @EXPORT = qw(foobar);
 
-use Assert::Refute::Build;
+use Refute::Builder;
 use Assert::Refute::Contract;
 
 =head2 dies_like

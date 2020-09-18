@@ -46,7 +46,7 @@ test results are fed to the more backend.
 use Carp;
 
 use parent qw(Refute::Core::Report);
-use Assert::Refute::Build qw(to_scalar);
+use Refute::Builder qw(to_scalar);
 
 =head2 new
 

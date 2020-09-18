@@ -43,7 +43,7 @@ See L<Assert::Refute::Contract> for contract I<definition>.
 use Carp;
 use Scalar::Util qw( blessed weaken );
 
-use Assert::Refute::Build qw(to_scalar);
+use Refute::Builder qw(to_scalar);
 
 # Always add basic testing primitives to the arsenal
 require Assert::Refute::T::Basic;
@@ -325,7 +325,7 @@ C<contract_is>, C<is_deeply>, C<fail>, C<pass>, C<note>, C<diag>.
 
 See L<Assert::Refute::T::Basic> for more details.
 
-Additionally, I<any> checks defined using L<Assert::Refute::Build>
+Additionally, I<any> checks defined using L<Refute::Builder>
 will be added to L<Refute::Core::Report> as methods
 unless explicitly told otherwise.
 

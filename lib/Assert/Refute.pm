@@ -149,7 +149,7 @@ use Carp;
 use Exporter;
 
 use Refute::Core::Report;
-use Assert::Refute::Build qw(current_contract);
+use Refute::Builder qw(current_contract);
 use Assert::Refute::T::Basic;
 
 my @basic = (
@@ -573,7 +573,7 @@ both L<Assert::Refute> and L<Test::More> control.
 
 Dies if no contract could be detected.
 
-It is actually a clone of L<Assert::Refute::Build/current_contract>.
+It is actually a clone of L<Refute::Builder/current_contract>.
 
 =head1 STATIC METHODS
 
@@ -743,7 +743,7 @@ sub refute_these (&;@) { ## no critic # need prototype
 Although building wrappers around C<refute> call is easy enough,
 specialized tool exists for doing that.
 
-Use L<Assert::Refute::Build> to define new I<checks> as
+Use L<Refute::Builder> to define new I<checks> as
 both prototyped exportable functions and their counterpart methods
 in L<Refute::Core::Report>.
 These functions will perform absolutely the same
@@ -751,7 +751,7 @@ under control of C<try_refute>, C<contract>, and L<Test::More>:
 
     package My::Prime;
 
-    use Assert::Refute::Build;
+    use Refute::Builder;
     use parent qw(Exporter);
 
     build_refute is_prime => sub {

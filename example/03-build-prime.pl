@@ -30,7 +30,7 @@ It actually caught a bug in my prime definition on first run of this script!
 # We're not exporting anything just yet (already in main)
 # But if we did, Exporter has to be use'd manually just yet
 use parent qw(Exporter);
-use Assert::Refute::Build;
+use Refute::Builder;
 
 # build refutation
 build_refute is_prime => sub {
