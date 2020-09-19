@@ -150,7 +150,16 @@ $known{$_}++ for qw(args list block no_proto manual
     export export_ok no_create);
 
 sub build_refute(@) { ## no critic # Moose-like DSL for the win!
-    my ($name, $cond, %opt) = @_;
+    my $name = shift;
+    my $cond;
+    if (ref $_[-1] eq 'CODE') {
+        $cond = pop;
+    } elsif (ref $_[0] eq 'CODE') {
+        $cond = shift;
+    } else {
+        croak "build_refute(): a code block must be supplied";
+    };
+    my %opt = @_;
 
     my $class = "Refute::Report";
 
