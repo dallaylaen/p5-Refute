@@ -126,23 +126,28 @@ sub done_testing {
     $self->SUPER::done_testing;
 };
 
-=head2 do_log( $indent, $level, $message )
+=head2 diag( @message )
 
-Just fall back to diag/note.
-Indentation is ignored.
+=head2 note( @message )
 
 =cut
 
-sub do_log {
-    my ($self, $indent, $level, @mess) = @_;
+sub diag {
+    my $self = shift;
 
-    if ($level == -1) {
-        $self->{builder}->diag($_) for @mess;
-    } elsif ($level > 0) {
-        $self->{builder}->note($_) for @mess;
-    };
+    $self->SUPER::diag(@_);
+    $self->{builder}->diag( join " ", map { to_scalar($_) } @_ );
 
-    $self->SUPER::do_log( $indent, $level, @mess );
+    return $self;
+};
+
+sub note {
+    my $self = shift;
+
+    $self->SUPER::note(@_);
+    $self->{builder}->note( join " ", map { to_scalar($_) } @_ );
+
+    return $self;
 };
 
 =head2 get_count

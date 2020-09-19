@@ -150,7 +150,6 @@ sub not_ok {
     my $n = ++$self->{count};
     $self->{name}{$n} = $msg if defined $msg;
     delete $self->{log}; # log is a shortcut to $self->{messages}{$n}
-                         # see do_log()
 
     # Pass, return ASAP
     return $n unless $cond;
@@ -180,13 +179,25 @@ References are auto-explained via L<Data::Dumper>.
 sub diag {
     my $self = shift;
 
-    $self->do_log( 0, -1, join " ", map { to_scalar($_) } @_ );
+    $self->_croak( $ERROR_DONE )
+        if $self->{done};
+
+    $self->{log} ||= $self->{messages}{ $self->{count} } ||= [];
+    push @{ $self->{log} }, [0, -1, join " ", map { to_scalar($_) } @_];
+
+    return $self;
 };
 
 sub note {
     my $self = shift;
 
-    $self->do_log( 0, 1, join " ", map { to_scalar($_) } @_ );
+    $self->_croak( $ERROR_DONE )
+        if $self->{done};
+
+    $self->{log} ||= $self->{messages}{ $self->{count} } ||= [];
+    push @{ $self->{log} }, [0,  1, join " ", map { to_scalar($_) } @_];
+
+    return $self;
 };
 
 =head3 done_testing
@@ -739,26 +750,6 @@ sub do_run {
     local $Refute::DRIVER = $self;
     $code->($self, @args);
     $self->done_testing(0);
-
-    return $self;
-};
-
-=head3 do_log( $indent, $level, $message )
-
-Append a message to execution log.
-
-See L</get_tap($level)> for level descriptions.
-
-=cut
-
-sub do_log {
-    my ($self, $indent, $level, $mess) = @_;
-
-    $self->_croak( $ERROR_DONE )
-        if $self->{done};
-
-    $self->{log} ||= $self->{messages}{ $self->{count} } ||= [];
-    push @{ $self->{log} }, [$indent, $level, $mess];
 
     return $self;
 };
