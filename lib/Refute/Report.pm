@@ -405,6 +405,14 @@ sub subcontract {
     return $ret;
 };
 
+=head3 subtest
+
+Alias to C<subcontract>.
+
+=cut
+
+*subtest = *subtest = __PACKAGE__->can('subcontract');
+
 =head2 QUERYING PRIMITIVES
 
 =head3 is_done

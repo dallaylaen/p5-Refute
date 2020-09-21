@@ -62,14 +62,6 @@ sub plan {
     $self->SUPER::plan(@_);
 };
 
-=head3 subtest
-
-Alias to C<subcontract>.
-
-=cut
-
-*subtest = *subtest = __PACKAGE__->can('subcontract');
-
 =head3 exported_to
 
 =cut
