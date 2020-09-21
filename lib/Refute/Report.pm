@@ -47,6 +47,7 @@ use Refute::Builder qw(to_scalar);
 require Refute::Common;
 
 my $ERROR_DONE = "done_testing was called, no more changes may be added";
+our @CARP_NOT = qw(Refute Refute::Builder);
 
 =head1 METHODS
 
@@ -155,7 +156,8 @@ sub not_ok {
     return $n unless $cond;
 
     # Test failed!
-    $self->{fail}{$n} = $cond;
+    $self->{fail}{$n} = $cond; # TODO serialize here, don't wait till end
+    $self->{where}{$n} = Carp::shortmess('');
     $self->{fail_count}++;
     return 0;
 };
@@ -547,6 +549,10 @@ sub get_result_details {
         my $reason = $self->{fail}{$n};
         my @diag;
 
+        # TODO
+        # push @diag, [ 0, -1, "Contition failed$self->{where}{$n}" ]
+        #    if $self->{where}{$n};
+
         if (ref $reason eq 'ARRAY') {
             push @diag, [ 0, -1, to_scalar($_) ] for @$reason;
         } elsif ( $reason and $reason ne 1 ) {
@@ -558,6 +564,7 @@ sub get_result_details {
         $ret{reason}      = $reason;
         $ret{log}         = [@diag, @messages];
         $ret{subcontract} = $self->{subcontract}{$n};
+        $ret{where}       = $self->{where}{$n};
     } else {
         # leading or trailing messages
         $ret{log} = \@messages,
