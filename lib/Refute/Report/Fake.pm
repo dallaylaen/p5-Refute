@@ -31,15 +31,17 @@ sub import {
     require Test::More;
     require Test::Builder;
 
-    push @ISA, qw(Test::Builder);
-
-    no warnings 'redefine'; ## no critic
+    foreach ( qw( maybe_regex ) ) {
+        no strict 'refs'; ## no critic
+        *$_ = Test::Builder->can($_);
+    };
 
     foreach (@Refute::Common::EXPORT) {
         no strict 'refs'; ## no critic
         undef *{ "Test::More::$_" };
     };
     Refute::Common->import::into( 'Test::More' );
+    no warnings 'redefine';
     *Test::Builder::new = *Test::Builder::new = sub {
         undef $Refute::DRIVER
             if $pid != $$;
@@ -48,7 +50,7 @@ sub import {
     };
 };
 
-=head2 plan
+=head3 plan
 
 Allow empty plan as Test::More seems to do that, otherwise use C<plan>.
 
@@ -58,6 +60,28 @@ sub plan {
     my $self = shift;
     return unless @_; # Test::More does this
     $self->SUPER::plan(@_);
+};
+
+=head3 subtest
+
+Alias to C<subcontract>.
+
+=cut
+
+*subtest = *subtest = __PACKAGE__->can('subcontract');
+
+=head3 exported_to
+
+=cut
+
+sub exported_to {
+    my $self = shift;
+
+    if (@_) {
+        $self->{exported_to} = shift;
+    } else {
+        return $self->{exported_to};
+    };
 };
 
 END {
